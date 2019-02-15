@@ -1,160 +1,89 @@
-id,title,price,auction_fee,low_estimate,high_estimate,signed,area,year_created,auction_lot,auction_house,auction_date
-WK1920184,LE ROND ROUGE,"$20,621,000",1,"$18,000,000","$25,000,000",Signed and Dated,1601.25,1939,4,Sotheby's New York,11/12/2018
-WK1920186,IMPROVISATION AUF MAHAGONI (IMPROVISATION ON MAHOGANY),"$24,233,800",1,"$15,000,000","$20,000,000",Signed Lower Left,987.5,1910,6,Sotheby's New York,11/12/2018
-WK1920188,ZUM THEMA JNGSTES GERICHT (ON THE THEME OF THE LAST JUDGEMENT),"$22,879,000",1,"$22,000,000","$35,000,000",Signed Monogram,379.25,1913,8,Sotheby's New York,11/12/2018
-WK1920189,RAPALLO,"$471,000",1,"$400,000","$600,000",Signed and Dated,120.81440000000002,1905,9,Sotheby's New York,11/12/2018
-WK19201818,TREPPE ZUM SCHLOSS (STEPS TO THE CASTLE),-not sold-,0,"$3,000,000","$5,000,000",Signed and Dated,229.19,1909,18,Sotheby's New York,11/12/2018
-WK19201812,GABRIELE MNTER IM FREIEN VOR DER STAFFELEI (GABRIELE MNTER PAINTING OUTDOORS IN FRONT OF AN EASEL),"$6,960,840 (5,303,500)",1,"$3,937,500 (3,000,000)","$6,562,500 (5,000,000)",Signed Lower Left,224.256,1910,12,"Sotheby's London, New Bond Street",06/19/2018
-WK19201833,Winterstudie mit Berg,"$6,500,000",1,"$3,000,000","$5,000,000",Signed Lower Right,227.5,1908,33,"Christie's New York, Rockefeller Center",05/08/2018
-WK19201844,Studie fr Landschaft (Dnaberg),"$8,870,860 (6,758,750)",1,"$3,937,500 (3,000,000)","$6,562,500 (5,000,000)",Signed Lower Left,229.6872,1910,44,"Christie's London, King Street",02/27/2018
-WK1920179A,Improvisation mit Pferden (Studie fr Improvisation 20),"$12,687,500",1,"$9,000,000","$15,000,000",Signed and Dated,1092.0,1911,9A,"Christie's New York, Rockefeller Center",11/13/2017
-WK19201720,WEISS AUF SCHWARZ (WHITE ON BLACK),"$792,500",1,"$800,000","$1,200,000",Signed and Dated,749.375,1930,20,Sotheby's New York,09/26/2017
-WK19201719,Weilheim-Marienplatz,"$5,203,470 (4,085,000)",1,"$4,458,300 (3,500,000)","$7,005,900 (5,500,000)",Unavailable,228.62400000000002,1909,19,"Christie's London, King Street",06/27/2017
-WK19201744,4 FIGUREN AUF 3 QUADRATEN (4 FIGURES ON 3 SQUARES),"$592,000 (464,750)",1,"$573,210 (450,000)","$827,970 (650,000)",Signed and Dated,377.60819999999995,1943,44,"Sotheby's London, New Bond Street",06/21/2017
-WK19201747,MURNAU - LANDSCHAFT MIT GRNEM HAUS (MURNAU - LANDSCAPE WITH GREEN HOUSE),"$26,713,180 (20,971,250)",1,"$19,107,000 (15,000,000)","$31,845,000 (25,000,000)",Signed and Dated,1041.7679999999998,1909,47,"Sotheby's London, New Bond Street",06/21/2017
-WK19201753,BILD MIT WEISSEN LINIEN (PAINTING WITH WHITE LINES),"$42,046,550 (33,008,750)",1,n/a,n/a,Signed and Dated,2037.7355,1913,53,"Sotheby's London, New Bond Street",06/21/2017
-WK192017107,"RAPALLO, SEASCAPE WITH STEAMER",-not sold-,0,"$193,830 (150,000)","$258,440 (200,000)",,102.548,1906,107,"Sotheby's London, New Bond Street",06/06/2017
-WK19201729A,Oben und links,"$8,311,500",1,"$5,000,000","$7,000,000",Signed Monogram,539.8249999999999,1925,29A,"Christie's New York, Rockefeller Center",05/15/2017
-WK192017108,UNFESTER AUSGLEICH (UNSTABLE COMPENSATION),"$687,480 (560,750)",1,"$429,100 (350,000)","$551,700 (450,000)",Signed Monogram,230.1828,1930,108,"Sotheby's London, New Bond Street",03/02/2017
-WK192017456,"Le Parc de Saint-Cloud, L'entre",-not sold-,0,"$247,420 (200,000)","$371,130 (300,000)",Inscribed,130.97400000000002,c. 1906,456,"Christie's London, King Street",03/01/2017
-WK192016205,"Tunis - Strand, 1905","$206,270 (193,750)",1,"$159,690 (150,000)",n/a,Unavailable,121.9995,1905,205,"Ketterer Kunst, Munich",12/10/2016
-WK1920161323,Spitzingsee,"$319,500",1,"$180,000","$250,000",Signed and Titled,117.61000000000001,1901,1323,"Christie's New York, Rockefeller Center",11/17/2016
-WK19201618B,Rigide et courb,"$23,319,500",1,"$18,000,000","$25,000,000",Signed Monogram,2866.9344,1935,18B,"Christie's New York, Rockefeller Center",11/16/2016
-WK19201619,Kreis u. Fleck / Cercle et tache / Circle and Spot,"$3,575,000 (S. KRONA32,500,000)",0,"$2,750,000 (S. KRONA25,000,000)","$3,300,000 (S. KRONA30,000,000)",Signed and Dated,799.5777999999999,1929,19,Stockholm Auktionsverk,11/15/2016
-WK192016206,Scheveningen - Strand,-not sold-,0,"$218,610 (150,000)","$291,480 (200,000)",Inscribed and Signed,119.0475,not given,206,"Christie's London, King Street",06/23/2016
-WK1920165,Mit und Gegen (For and Against),-not sold-,0,"$2,914,800 (2,000,000)","$4,372,200 (3,000,000)",Signed and Dated,263.61139999999995,1929,5,"Christie's London, King Street",06/22/2016
-WK1920166,Esquisse pour Autour du cercle,"$2,568,670 (1,762,500)",1,"$2,186,100 (1,500,000)","$3,643,500 (2,500,000)",Unavailable,366.3462,1940,6,"Christie's London, King Street",06/22/2016
-WK1920168,Zersetzte Spannung (Disintegrated Tension),"$1,915,750 (1,314,500)",1,"$1,457,400 (1,000,000)","$2,186,100 (1,500,000)",Signed and Dated,265.8162,1930,8,"Christie's London, King Street",06/22/2016
-WK1920169,Verschleiertes Glhen (Veiled Glow),"$1,834,140 (1,258,500)",1,"$1,748,880 (1,200,000)","$2,623,320 (1,800,000)",Signed and Dated,744.7491,1928,9,"Christie's London, King Street",06/22/2016
-WK192016339,KOCHEL - BERGWIESE VOR WALDRAND (KOCHEL - MOUNTAIN MEADOW AT THE EDGE OF THE FOREST),"$444,510 (305,000)",1,"$262,330 (180,000)","$364,350 (250,000)",Signed Lower Left,118.3044,1902,339,"Sotheby's London, New Bond Street",06/22/2016
-WK19201627,FIDEL (JOLLY),"$566,930 (389,000)",1,"$364,350 (250,000)","$510,090 (350,000)",Signed and Dated,124.8468,1930,27,"Sotheby's London, New Bond Street",06/21/2016
-WK1920169,Rural Landscape,-not sold-,0,"$408,070 (280,000)","$510,090 (350,000)",Signed,114.156,c.1903,9,MacDougall's Auctions,06/08/2016
-WK1920161312,Spitzingsee,-not sold-,0,"$300,000","$500,000",Signed Lower Left,117.61000000000001,1901,1312,"Christie's New York, Rockefeller Center",05/13/2016
-WK19201662,BINDUNG (BINDING),"$1,930,000",1,"$2,000,000","$3,000,000",Signed and Dated,649.8249999999999,May 1932,62,Sotheby's New York,05/09/2016
-WK192016139,SCHLUSS (CONCLUSION),-not sold-,0,"$1,024,870 (700,000)","$1,464,100 (1,000,000)",Signed Lower Left,475.35,1926,139,"Sotheby's London, New Bond Street",02/04/2016
-WK192016326,"RAPALLO, SEASCAPE WITH STEAMER",-not sold-,0,"$366,030 (250,000)","$512,440 (350,000)",Unavailable,102.37920000000001,1906,326,"Sotheby's London, New Bond Street",02/04/2016
-WK19201637,FLCHEN UND LINIEN (SURFACES AND LINES),-not sold-,0,"$1,002,190 (700,000)","$1,431,700 (1,000,000)",Signed and Dated,531.6324,1930,37,"Sotheby's London, New Bond Street",02/03/2016
-WK19201616,Murnau Strasse,"$2,042,320 (1,426,500)",1,"$2,147,550 (1,500,000)","$3,579,250 (2,500,000)",Inscribed,209.6586,1908,16,"Christie's London, King Street",02/02/2016
-WK19201551,"KALLMNZ, REGENTAG",-not sold-,0,"$603,400 (400,000)","$905,100 (600,000)",Signed Lower Right,122.7555,not given,51,"Sotheby's London, New Bond Street",12/01/2015
-WK19201555,Schwebender Druck,"$2,165,000",1,"$1,800,000","$2,500,000",Signed Monogram,855.625,1931,55,"Christie's New York, Rockefeller Center",11/12/2015
-WK19201523,VERTIEFTE REGUNG (DEEPENED IMPULSE),"$6,410,000",1,"$6,000,000","$8,000,000",Signed Monogram,1176.6744,1928,23,Sotheby's New York,11/05/2015
-WK19201517,KHLE ENERGIE (COOL ENERGY),"$1,330,000",1,"$2,000,000","$3,000,000",Signed Monogram,672.175,1926,17,Sotheby's New York,11/04/2015
-WK19201516,GRN (GREEN),"$1,912,460 (1,205,000)",1,"$1,904,520 (1,200,000)","$2,856,780 (1,800,000)",Signed Monogram,529.4276,1929,16,"Sotheby's London, New Bond Street",06/24/2015
-WK19201550,ROSA IM GRAU (ROSE IN GREY),"$1,150,650 (725,000)",1,"$1,110,970 (700,000)","$1,587,100 (1,000,000)",Signed and Dated,333.6138,1926,50,"Sotheby's London, New Bond Street",06/24/2015
-WK19201537,Ernst - Spass,"$2,034,190 (1,314,500)",1,"$1,083,250 (700,000)","$1,547,500 (1,000,000)",Signed Monogram,531.6324,May 1930,37,"Christie's London, King Street",02/04/2015
-WK19201522,MOSKAU II (MOSCOW II),"$9,763,180 (6,309,000)",1,"$9,285,000 (6,000,000)","$12,380,000 (8,000,000)",Unavailable,311.0184,1916,22,"Sotheby's London, New Bond Street",02/03/2015
-WK19201410,Im Herbst (Herbsttage),"$331,450 (250,000)",1,"$265,160 (200,000)","$331,450 (250,000)",Signed Lower Left,516.0970000000001,Circa 1901,10,Grisebach,11/27/2014
-WK192014150,GITTERFORM (NETTING),"$965,000",1,"$900,000","$1,200,000",Signed Monogram,646.25,1927,150,Sotheby's New York,11/05/2014
-WK1920142,DIAGONALE,"$1,505,000",1,"$1,200,000","$1,800,000",Signed Monogram,531.8774999999999,1930,2,Sotheby's New York,11/04/2014
-WK19201411,Schwebender Druck,-not sold-,0,"$3,095,000 (2,000,000)","$4,642,500 (3,000,000)",Signed and Dated,855.2736,1931,11,"Christie's London, King Street",06/24/2014
-WK19201430,HERBSTLANDSCHAFT (AUTUMN LANDSCAPE),"$8,620,350 (5,570,500)",1,"$4,642,500 (3,000,000)","$7,737,500 (5,000,000)",Signed and Dated,1100.3835000000001,1911,30,"Sotheby's London, New Bond Street",06/23/2014
-WK192014127,SKIZZE FR ABEND (SKETCH FOR EVENING),"$425,000",1,"$350,000","$450,000",Signed Lower Right,125.19000000000001,1901,127,Sotheby's New York,05/08/2014
-WK1920144,Pointes noires,"$5,765,000",1,"$4,000,000","$6,000,000",Signed Monogram,1242.3775,1937,4,"Christie's New York, Rockefeller Center",05/06/2014
-WK19201417,Strandszene,"$17,189,000",1,"$16,000,000","$22,000,000",Signed and Dated,547.385,1909,17,"Christie's New York, Rockefeller Center",05/06/2014
-WK192014153,SANS TITRE,"$152,430 (98,500)",1,"$154,750 (100,000)","$232,130 (150,000)",Signed Monogram,100.89399999999999,1917,153,"Sotheby's London, New Bond Street",02/06/2014
-WK192014284,TUNIS - LA BAIE,"$338,130 (218,500)",1,"$278,550 (180,000)","$386,880 (250,000)",Unavailable,64.2909,1905,284,"Sotheby's London, New Bond Street",02/06/2014
-WK19201453,STUDIE FR IMPROVISATION 10 (STUDY FOR IMPROVISATION 10),"$6,193,870 (4,002,500)",1,"$6,190,000 (4,000,000)","$9,285,000 (6,000,000)",Unavailable,616.2975,1910,53,"Sotheby's London, New Bond Street",02/05/2014
-WK19201315,BUNT IM DREIECK (BIGARRURE DANS LE TRIANGLE),"$2,356,610 (1,777,500)",1,"$1,590,960 (1,200,000)","$2,386,440 (1,800,000)",Signed and Dated,286.5021,1927,15,Sotheby's Paris,12/04/2013
-WK192013336,PARK VON ST. CLOUD -EINGANG (PARK OF ST. CLOUD -ENTRANCE),"$425,000",1,"$350,000","$450,000",Inscribed,129.72440000000003,1906,336,Sotheby's New York,11/07/2013
-WK19201324,GEDRCKT,"$1,685,000",1,"$800,000","$1,200,000",Signed Monogram,526.0749999999999,1929,24,Sotheby's New York,11/06/2013
-WK19201326,Scharf im dumpf,"$1,085,000",1,"$1,000,000","$1,500,000",Signed and Dated,370.5625,1929,26,"Christie's New York, Rockefeller Center",11/05/2013
-WK19201339,Schwarz und Violett,"$12,597,000",1,"$4,500,000","$7,500,000",Signed Monogram,1209.885,1923,39,"Christie's New York, Rockefeller Center",11/05/2013
-WK19201341,HERBSTLANDSCHAFT,-not sold-,0,"$20,000,000","$25,000,000",Signed and Dated,1100.7269000000001,1911,41,"Christie's New York, Rockefeller Center",11/04/2013
-WK19201314,GEFLECHT (WOVEN),-not sold-,0,"$1,096,550 (700,000)","$1,566,500 (1,000,000)",Signed and Dated,534.9773,1927,14,"Sotheby's London, New Bond Street",06/19/2013
-WK19201351,STUDIE FR HERBSTLANDSCHAFT MIT BOOTEN (STUDY FOR AUTUMN LANDSCAPE WITH BOATS),"$9,954,320 (6,354,500)",1,"$4,699,500 (3,000,000)","$7,832,500 (5,000,000)",Unavailable,184.3535,1908,51,"Sotheby's London, New Bond Street",06/19/2013
-WK1920136,Studie zu Improvisation 3,"$21,212,800 (13,501,875)",1,"$18,853,200 (12,000,000)","$25,137,600 (16,000,000)",Signed and Dated,448.272,1910,6,"Christie's London, King Street",06/18/2013
-WK19201322,BLAUER KREIS NO. 2 (CERCLE BLEU II),"$2,193,120 (1,676,700)",1,"$1,308,000 (1,000,000)","$1,962,000 (1,500,000)",Signed and Dated,391.8332,1925,22,Sotheby's Paris,06/06/2013
-WK1920137,Kochel - Gebirgslandschaft mit Tannen,-not sold-,0,"$322,380 (250,000)","$451,330 (350,000)",Signed Lower Right,203.525,1902,7,Grisebach,05/30/2013
-WK192013447,Tunis-Strand,-not sold-,0,"$344,450 (220,000)","$501,020 (320,000)",Unavailable,123.27510000000001,1905,447,"Christie's London, King Street",02/07/2013
-WK19201320,Balancement,-not sold-,0,"$7,864,000 (5,000,000)","$12,582,400 (8,000,000)",Signed and Dated,1600.2768,1942,20,"Christie's London, King Street",02/06/2013
-WK19201321,Dicht,-not sold-,0,"$629,120 (400,000)","$943,680 (600,000)",Signed and Dated,203.364,1929,21,"Christie's London, King Street",02/06/2013
-WK19201326,"Murnau - Ansicht mit Burg, Kirche und Eisenbahn","$10,634,090 (6,761,250)",1,"$7,864,000 (5,000,000)","$11,009,600 (7,000,000)",Signed and Dated,513.513,1909,26,"Christie's London, King Street",02/06/2013
-WK19201329,Abend im Park,-not sold-,0,"$2,359,200 (1,500,000)","$3,145,600 (2,000,000)",Unavailable,528.4136000000001,1909,29,"Christie's London, King Street",02/06/2013
-WK19201328,BERHRUNG (CONTACT),"$1,684,530 (1,071,650)",1,"$943,140 (600,000)","$1,414,710 (900,000)",Signed Monogram,667.4060000000001,1924,28,"Sotheby's London, New Bond Street",02/05/2013
-WK19201217,RAPALLO-STRASSE,-not sold-,0,"$240,390 (150,000)","$320,520 (200,000)",Unavailable,122.7555,not given,17,"Sotheby's London, New Bond Street",11/26/2012
-WK192012400,Binz auf Rgen,"$602,500",1,"$400,000","$600,000",Signed Lower Left,121.94000000000001,1901,400,"Christie's New York, Rockefeller Center",11/08/2012
-WK192012410,"Rapallo, Boote","$1,022,500",1,"$600,000","$800,000",Inscribed and Signed,123.5,1905,410,"Christie's New York, Rockefeller Center",11/08/2012
-WK19201247,Studie fr Improvisation 8,"$23,042,500",1,"$20,000,000","$30,000,000",Unavailable,1062.325,1909,47,"Christie's New York, Rockefeller Center",11/07/2012
-WK19201250,Bindung,-not sold-,0,"$2,500,000","$3,500,000",Signed and Dated,649.8249999999999,1932,50,"Christie's New York, Rockefeller Center",11/07/2012
-WK19201252,Zwei Schwarze Flecke,-not sold-,0,"$1,800,000","$2,400,000",Signed and Dated,241.50000000000003,1923,52,"Christie's New York, Rockefeller Center",11/07/2012
-WK192012221,"KOCHELSEE, NEBEL (KOCHELLAKE, FOG)",-not sold-,0,"$300,000","$400,000",Signed Lower Right,202.1294,1902,221,Sotheby's New York,11/07/2012
-WK192012406,Paysage avec pont,"$681,290 (433,250)",1,"$235,880 (150,000)","$393,130 (250,000)",Unavailable,118.6775,1903,406,"Christie's London, King Street",06/21/2012
-WK19201249,Diagonale,-not sold-,0,"$1,882,920 (1,200,000)","$2,510,560 (1,600,000)",Signed Monogram,531.6324,1930,49,"Christie's London, King Street",06/20/2012
-WK19201252,Loses im Rot,-not sold-,0,"$3,922,750 (2,500,000)","$5,491,850 (3,500,000)",Signed Monogram,531.6872,1925,52,"Christie's London, King Street",06/20/2012
-WK192012336,VASILKEVSKO - SCHEUNE MIT PFERDCHEN (VASILKEVSKO - BARN WITH PONY),"$338,500",1,"$300,000","$400,000",Signed Lower Right,113.67,1903,336,Sotheby's New York,05/03/2012
-WK2012820,Abstract painting,"$2,000",0,"$4,000","$6,000",Unavailable,177.1875,not given,820,Midwest Auction Galleries,02/11/2012-02/12/2012
-WK19201228,Thema,"$4,662,000 (2,953,250)",1,"$3,946,500 (2,500,000)","$5,525,100 (3,500,000)",Signed Monogram,706.86,1927,28,"Christie's London, King Street",02/07/2012
-WK192011221,Vom Halbkreis Hinauf,-not sold-,0,"$2,500,000","$3,000,000",Signed and Dated,3375.0,1931,221,Fine Art Auctions Miami-FAAM,12/04/2011
-WK1920115,RAPALLO - BOOT IM MEER,"$901,090 (671,000)",1,"$402,870 (300,000)","$537,160 (400,000)",Unavailable,122.2359,1906,5,Grisebach,11/24/2011
-WK192011153,PARK VON ST. CLOUD - HERBST I,"$446,500",1,"$250,000","$350,000",Signed Lower Left,129.72440000000003,1906,153,Sotheby's New York,11/03/2011
-WK19201147,WEISSER KLANG (WHITE SOUND),"$8,930,500",1,"$7,000,000","$10,000,000",Signed Lower Right,763.4168999999999,1908,47,Sotheby's New York,11/02/2011
-WK19201143,SCHARF-RUHIG,"$4,774,520 (2,953,250)",1,"$970,020 (600,000)","$1,293,360 (800,000)",Signed Monogram,246.9348,1927,43,"Christie's London, King Street",06/21/2011
-WK19201154,Bayerisches Dorf mit Feld,"$8,033,790 (4,969,250)",1,"$3,233,400 (2,000,000)","$4,850,100 (3,000,000)",Signed Lower Left,270.92560000000003,1908,54,"Christie's London, King Street",06/21/2011
-WK19201144,LA FORME ROUGE,-not sold-,0,"$2,800,000","$3,500,000",Signed and Dated,762.0675,1938,44,Sotheby's New York,05/03/2011
-WK201041,Park im Herbst,-not sold-,0,"$236,750 (180,000)",n/a,Unavailable,117.93599999999999,c.1903,41,Hauswedell & Nolte,12/03/2010-12/04/2010
-WK19201031,Gekreuzigter Christus - in the artist's frame,"$1,550,270 (1,049,250)",1,"$591,000 (400,000)","$886,500 (600,000)",Signed Monogram,142.8336,1911,31,"Christie's London, King Street",06/23/2010
-WK19201037,SCHLUSS (CONCLUSION),"$807,500 (660,750)",1,"$549,950 (450,000)","$794,370 (650,000)",Signed and Dated,472.5,1926,37,Sotheby's Paris,06/03/2010
-WK19201015,KHLE (FRACHEUR),"$1,594,500",1,"$800,000","$1,200,000",Signed Monogram,530.8575,1941,15,Sotheby's New York,05/05/2010
-WK19201020,VERTIEFTE REGUNG (DEEPENED IMPULSE),"$5,682,500",1,"$4,500,000","$6,500,000",Signed Monogram,1176.6744,1928,20,Sotheby's New York,05/05/2010
-WK192009120,Park im Herbst,-not sold-,1,"$279,380 (190,000)",n/a,Inscribed,118.314,1903,120,"Ketterer Kunst, Munich",12/12/2009
-WK19200924,KRASS UND MILD (DRAMATIC AND MILD),"$10,610,500",1,"$6,000,000","$8,000,000",Inscribed and Signed,1877.6694000000002,1932,24,Sotheby's New York,11/04/2009
-WK19200953,FLATTERHAFT (FLUTTER-LIKE),"$1,538,500",1,"$1,000,000","$1,500,000",Signed Monogram,534.1875,1931,53,Sotheby's New York,11/04/2009
-WK19200915,Winkelschwung,"$2,658,500",1,"$1,500,000","$2,500,000",Signed Monogram,528.5618999999999,1929,15,"Christie's New York, Rockefeller Center",11/03/2009
-WK192009301,Streifen,"$354,830 (217,250)",1,"$326,660 (200,000)","$489,990 (300,000)",Signed Monogram,121.03059999999999,1930,301,"Christie's London, King Street",06/24/2009
-WK19200926,Flchen und Linien,"$948,250 (577,250)",1,"$657,080 (400,000)","$985,620 (600,000)",Signed Monogram,528.7532,1930,26,"Christie's London, King Street",06/23/2009
-WK192009242,Kochel-Gabriele Mnter,"$362,500",1,"$300,000","$400,000",Unavailable,121.94000000000001,1902,242,"Christie's New York, Rockefeller Center",05/07/2009
-WK192009245,Kallmnz-Vilsgasse I (Rosa Landschaft),"$386,500",1,"$200,000","$300,000",Unavailable,196.305,1903,245,"Christie's New York, Rockefeller Center",05/07/2009
-WK192009405,Park im Herbst,"$174,950 (121,250)",1,"$173,150 (120,000)","$230,860 (160,000)",Unavailable,117.93599999999999,1903,405,"Christie's London, King Street",02/05/2009
-WK19200849,TENEBRES,"$806,500",1,"$800,000","$1,200,000",Signed Monogram,377.52,1943,49,"Christie's New York, Rockefeller Center",11/06/2008
-WK19200846,VIOLETT-GRN (VIOLET-GREEN),"$2,322,500",1,"$1,800,000","$2,500,000",Signed and Dated,533.5325,1926,46,Sotheby's New York,11/03/2008
-WK1920081,PARK VON ST CLOUD - MIT REITER (PARK OF ST CLOUD - WITH HORSEMAN),"$2,284,060 (1,161,250)",1,"$688,420 (350,000)","$885,110 (450,000)",Inscribed and Signed,121.1967,1906,1,"Sotheby's London, New Bond Street",06/25/2008
-WK192008567,Rapallo,"$356,500 (181,250)",1,"$295,040 (150,000)","$393,380 (200,000)",Unavailable,30.006899999999998,1906,567,"Christie's London, King Street",06/25/2008
-WK19200841,KALLMNZ - VILSGASSE II,"$948,640 (481,250)",1,"$788,480 (400,000)","$1,182,720 (600,000)",Signed,122.7555,not given,41,"Sotheby's London, New Bond Street",06/09/2008
-WK192008376,BERUHIGT,"$690,600",1,"$400,000","$600,000",Signed Monogram,367.296,1930,376,"Christie's New York, Rockefeller Center",05/07/2008
-WK192008232,Park im Herbst,"$403,130 (204,500)",1,"$295,700 (150,000)","$394,260 (200,000)",Unavailable,117.93599999999999,c. 1903,232,"Christie's London, King Street",02/05/2008
-WK19200827,Herbstlandschaft mit Baum,"$5,764,420 (2,932,500)",1,"$3,931,400 (2,000,000)","$5,897,100 (3,000,000)",Signed Lower Left,225.32999999999996,1910,27,"Christie's London, King Street",02/04/2008
-WK19200720,Kallmunz - Vilsgasse II,"$532,800 (264,000)",1,"$201,820 (100,000)","$302,730 (150,000)",Signed Lower Right,122.7555,1903,20,Bonhams Bond Street,12/19/2007
-WK192007118,GRN,"$1,394,380 (950,171)",1,"$733,750 (500,000)","$1,027,250 (700,000)",Signed Monogram,650.9672,1931,118,"Tajan, Paris",12/11/2007
-WK19200731,"RAPALLO, SEASCAPE WITH STEAMER","$784,060 (378,900)",1,"$289,700 (140,000)","$372,470 (180,000)",Unavailable,107.384,not given,31,"Sotheby's London, New Bond Street",11/26/2007
-WK192007370,DREI SULEN (THREE COLUMNS),"$818,110 (412,000)",1,"$496,430 (250,000)","$695,000 (350,000)",Signed,376.4504,1943,370,"Sotheby's London, New Bond Street",06/20/2007
-WK19200721,Rosa im Grau,"$1,146,490 (580,000)",1,"$988,350 (500,000)","$1,383,690 (700,000)",Signed Lower Left,337.1875,1926,21,"Christie's London, King Street",06/18/2007
-WK192007320,Skizze fr abend,-not sold-,0,"$300,000","$400,000",Unavailable,125.19000000000001,1901,320,"Christie's New York, Rockefeller Center",05/10/2007
-WK192007324,Park von St. Cloud--Herbst I,"$360,000",1,"$300,000","$400,000",Signed Lower Left,129.72440000000003,1906,324,"Christie's New York, Rockefeller Center",05/10/2007
-WK192007352,"KALLMNZ, REGENTAG","$384,000",1,"$180,000","$250,000",Signed Lower Right,123.5,1903,352,Sotheby's New York,05/09/2007
-WK19200723,Weisser Klang (White Sound),"$5,416,000",1,"$6,000,000","$8,000,000",Signed Lower Right,756.25,1908,23,Sotheby's New York,05/08/2007
-WK192007268,"Rapallo, Botte","$655,290 (333,600)",1,"$196,430 (100,000)","$294,650 (150,000)",Signed on Reverse,123.5,1905,268,"Christie's London, King Street",02/07/2007
-WK19200774,Diagonale,"$2,017,240 (1,028,000)",1,"$1,667,960 (850,000)","$2,354,760 (1,200,000)",Signed Monogram,3430.0,1930,74,"Christie's London, King Street",02/06/2007
-WK1920078,Weilheim- Marienplatz,"$4,885,030 (2,484,000)",1,"$2,949,900 (1,500,000)","$3,933,200 (2,000,000)",Unavailable,229.19,1909,8,"Sotheby's London, New Bond Street",02/05/2007
-WK1920064,Leise Deutung,"$1,360,000",1,"$500,000","$700,000",Signed Monogram,351.125,29,4,"Christie's New York, Rockefeller Center",11/08/2006
-WK19200627,STARNBERGER SEE (LAKE STARNBERG),"$9,088,000",1,"$6,000,000","$8,000,000",Unavailable,945.4399999999999,1908,27,Sotheby's New York,11/07/2006
-WK192006323,"Rapallo, coastal landscape with a steam ship","$140,580 (85,000)",0,"$99,230 (60,000)","$132,310 (80,000)",,105.652,1906,323,"Christie's London, King Street",06/21/2006
-WK19200627,Pfeile (Arrows),"$3,880,000",1,"$1,000,000","$1,500,000",Signed and Dated,1052.0594,1927,27,"Christie's New York, Rockefeller Center",05/02/2006
-WK1920061,HERBST BEI MURNAU (AUTUMN NEAR MURNAU),"$1,391,310 (792,000)",0,"$527,010 (300,000)","$878,350 (500,000)",Unavailable,204.79200000000003,1908,1,"Sotheby's London, New Bond Street",02/07/2006
-WK192005227,"Kallmunz, Regentag","$99,230 (60,000)",0,"$132,310 (80,000)","$198,470 (120,000)",Signed,122.7555,1903,227,"Christie's London, King Street",06/22/2005
-WK19200546,Sept,"$554,330 (366,400)",1,"$453,870 (300,000)","$605,160 (400,000)",Signed Monogram,377.11199999999997,1943,46,"Christie's London, King Street",06/21/2005
-WK192005403,DUMPF-KLAR (DULL-CLEAR),"$290,250 (159,200)",1,"$218,780 (120,000)","$328,180 (180,000)",Signed and Titled,196.75,1928,403,"Sotheby's London, New Bond Street",06/21/2005
-WK19200524,ZWEI REITER UND LIEGENDE GESTALT (TWO RIDERS AND RECLINING FIGURE),-not sold-,1,"$15,000,000","$25,000,000",Inscribed,766.7325,CIRCA 1909-10,24,Sotheby's New York,05/03/2005
-WK19200513,ARIEL-SZENE AUS FAUST II (ARIEL SCENE FROM FAUST II),-not sold-,0,"$185,740 (100,000)","$278,610 (150,000)",Unavailable,209.6586,1908,13,"Sotheby's London, New Bond Street",02/08/2005
-WK192004252,Flchen und Linien,"$509,420 (341,250)",1,"$328,420 (220,000)","$417,980 (280,000)",Signed Monogram,530.0892,1930,252,"Christie's London, King Street",06/23/2004
-WK192003220,Murnau coastline II,"$230,000",0,"$250,000","$350,000",,208.0,1908,220,Sotheby's New York,11/06/2003
-WK192003265,Waldrand,"$115,770 (70,000)",0,n/a,"$198,470 (120,000)",,122.7555,1903,265,"Christie's London, King Street",02/04/2003
-WK1920022,Reiter und apfelpfluckern - Rider and woman picking apples,-not sold-,0,"$264,940 (180,000)","$367,980 (250,000)",,58.8676,1911,2,"Sotheby's London, New Bond Street",10/08/2002
-WK1920028,Landschaft mit rosa wolke - Landscape with pink cloud,-not sold-,0,"$441,570 (300,000)","$588,760 (400,000)",Inscribed and Signed,224.98680000000002,1908,8,"Sotheby's London, New Bond Street",10/08/2002
-WK19200212,Murnau-Obermarkt,"$1,521,590 (920,000)",0,"$1,653,900 (1,000,000)","$2,315,460 (1,400,000)",,531.6324,1908,12,de Pury & Luxembourg,06/24/2002
-WK19199956,Waldrand - Waldlichtung - forest clearing,"$107,500 (65,000)",0,"$82,700 (50,000)","$115,770 (70,000)",,122.7555,1903,56,"Christie's London, King Street",10/07/1999
-WK191999289,Rapallo - Bagni Louisa,"$129,670 (S. KRONA890,000)",0,"$116,560 (S. KRONA800,000)","$145,700 (S. KRONA1,000,000)",Signed Initials,114.156,1906,289,Bukowski Stockholm,05/26/1999
-WK191999144,Dark point,"$192,000 (Lira480,000,000)",0,n/a,n/a,Signed Initials,265.8162,1930,144,"Finarte Semenzato, Milano",04/15/1999
-WK191998743,Bestimmend,"$220,000",0,"$150,000","$200,000",Signed Monogram,112.0,1928,743,"Christie's New York, Rockefeller Center",11/20/1998
-WK19199861,White Sound,"$3,000,000",0,"$3,000,000","$4,000,000",Signed,759.5536,1908,61,Sotheby's New York,11/16/1998
-WK19199831,"Murnau, Schloss und Kirche II","$810,410 (490,000)",0,"$413,480 (250,000)","$578,870 (350,000)",,254.92999999999998,1909,31,"Christie's London, King Street",10/08/1998
-WK1919983,Felder bei Murnau,"$529,250 (320,000)",0,"$463,090 (280,000)","$578,870 (350,000)",,209.6586,1908,3,"Sotheby's London, New Bond Street",07/02/1998
-WK19199728,Summer landscape at sunset,"$793,870 (480,000)",0,"$496,170 (300,000)","$661,560 (400,000)",,198.45,1908,28,"Sotheby's London, New Bond Street",12/08/1997
-WK191997209,Landschaft mit Apfelbaum,"$90,960 (55,000)",0,"$82,700 (50,000)","$115,770 (70,000)",,131.7576,1906,209,"Christie's London, King Street",10/09/1997
-WK19199755,4 x 5 = 20,"$500,000",0,"$500,000","$700,000",Signed Monogram,362.18160000000006,1943,55,"Christie's New York, Rockefeller Center",05/14/1997
-WK191996175,Ariel scene from Faust II,"$155,000",0,"$100,000","$150,000",,208.0,1908,175,"Christie's New York, Rockefeller Center",11/14/1996
-WK19199643,Two girls,"$72,770 (44,000)",0,"$24,810 (15,000)","$33,080 (20,000)",Signed Initials,70.68599999999999,1917,43,"Sotheby's London, New Bond Street",03/20/1996
-WK19199554,"Murnau, schloss und kirche II","$480,000",0,"$300,000","$400,000",,235.2489,1909,54,Sotheby's New York,11/08/1995
-WK19199520,Skizze fur Improvisation 4,"$4,134,750 (2,500,000)",0,n/a,n/a,,1063.2648,1909,20,"Sotheby's London, New Bond Street",06/27/1995
-WK19199410,Group of houses before mountain range near Murnau,"$163,080 (DM360,000)",0,n/a,n/a,Inscribed,230.1828,1908,10,Grisebach,05/27/1994
-WK191992137,Zu vier ecken,"$250,000",0,n/a,n/a,Signed Monogram,759.5536,1932,137,"Christie's New York, Rockefeller Center",05/12/1992
-WK19198473,Stabilite Animee,"$300,000",0,n/a,n/a,Signed Monogram,1610.0,1937,73,Sotheby's New York,05/15/1984
+id,artist,title,hammer,auction_fee,low_estimate,high_estimate,signed,area,year_created,auction_lot,auction_house,auction_date,sold_before,avg_sold_before
+20187,Juan Zarinena,CHRIST IN THE GARDEN OF GETHSEMANE,-not sold-,0,"9,190","11,810",Unavailable,"46.57"" x 31.10",not given,7,25 Blythe Road Ltd.,10/17/18,0,0
+201815,Francesco Podesti,SKETCH FOR THE DISCOVERY OF MOSES,147,1,131,262,Signed Lower Left,"8.46"" x 12.99",not given,15,25 Blythe Road Ltd.,10/17/18,0,0
+201817,John Moore of Ipswich,A SEASCAPE WITH A DISTANT COASTLINE,-not sold-,0,525,787,Signed Lower Left,"11.02"" x 18.11",not given,17,25 Blythe Road Ltd.,10/17/18,0.058823529,147
+201818,John Moore of Ipswich,A SEASCAPE WITH A PIER,-not sold-,0,525,787,Signed Lower Left,"14.17"" x 183.46",not given,18,25 Blythe Road Ltd.,10/17/18,0.055555556,147
+201821,William W Warren,A PAIR OF CONTINENTAL VIEWS,162,1,157,236,Unavailable,Dimensions not available,not given,21,25 Blythe Road Ltd.,10/17/18,0.047619048,147
+201822,Harry Williams Adams,"HILLSIDE COPSE (with sketch of tree, verso)",976,1,157,236,Signed,"17.13"" x 11.22",not given,22,25 Blythe Road Ltd.,10/17/18,0.090909091,154.5
+201826,Edwin Ellis,SHIPPING OFF A COASTAL FORT ON THE SOUTH COST OF ENGLAND,521,1,459,590,Signed Lower Left,"20.47"" x 14.57",not given,26,25 Blythe Road Ltd.,10/17/18,0.115384615,428.3333333
+201827,Sir Charles Holmes,THE TOWER OF OXFORD CASTLE,651,1,157,236,Signed and Dated,"12.01"" x 7.87",1905,27,25 Blythe Road Ltd.,10/17/18,0.148148148,451.5
+201828,Edward Francis Drew Pritchard,"PORTLAND ISLAND FROM THE BEACH AT SANDSFOOT CASTLE, PORTLAND BAY",-not sold-,0,393,656,Signed Lower Right,"15.35"" x 22.83",not given,28,25 Blythe Road Ltd.,10/17/18,0.178571429,491.4
+201829,Frank Richards,CLOUD EFFECTS - MOUNTS BAY,"1,269",1,787,"1,050",Signed Lower Right,"6.30"" x 9.45",not given,29,25 Blythe Road Ltd.,10/17/18,0.172413793,491.4
+201830,Herminie Henriette Gudin,COASTAL SCENE BY MOONLIGHT,-not sold-,0,"2,625","3,937",Signed Lower Right,"6.69"" x 9.84",not given,30,25 Blythe Road Ltd.,10/17/18,0.2,621
+201831,Charles H Branscombe,DEVON BEACH ON AN ESTUARY NEAR FALMOUTH,-not sold-,0,262,393,Signed Lower Left,"9.25"" x 17.32",not given,31,25 Blythe Road Ltd.,10/17/18,0.193548387,621
+201832,Holger H Jerichau,A STEAMBOAT ON THE TIBER,"1,953",1,656,918,Signed Lower Right,"7.48"" x 11.42",not given,32,25 Blythe Road Ltd.,10/17/18,0.1875,621
+201833,William John Montaigne,A PASTORAL LANDSCAPE WITH A STREAM,-not sold-,0,656,918,Inscribed,"11.97"" x 13.98",not given,33,25 Blythe Road Ltd.,10/17/18,0.212121212,811.2857143
+201834,Warren Blackham,RURAL SCENE WITH A DISTANT CHURCH,-not sold-,0,131,262,Unavailable,"14.17"" x 21.65",not given,34,25 Blythe Road Ltd.,10/17/18,0.205882353,811.2857143
+201838,David Cox the Younger,ARUNDEL CASTLE,-not sold-,0,105,157,Unavailable,"7.87"" x 10.83",not given,38,25 Blythe Road Ltd.,10/17/18,0.184210526,811.2857143
+201841,Ann Mary Newton,PORTRAIT OF A YOUNG CHILD,-not sold-,0,328,459,Signed and Dated,"7.32"" x 9.69",1855,41,25 Blythe Road Ltd.,10/17/18,0.170731707,811.2857143
+201842,Herbert Moxon Cook,A WOODLAND SCENE,65,1,105,157,Signed and Dated,"12.60"" x 18.70",1883,42,25 Blythe Road Ltd.,10/17/18,0.166666667,811.2857143
+201845,Samuel John Lamorna Birch,A HILLSIDE WOOD,-not sold-,0,525,787,Signed Lower Right,"10.04"" x 13.58",not given,45,25 Blythe Road Ltd.,10/17/18,0.177777778,718
+201846,Henry John Yeend-King,A FARMER HERDING SHEEP,-not sold-,0,262,393,Signed Lower Right,"7.87"" x 11.81",not given,46,25 Blythe Road Ltd.,10/17/18,0.173913043,718
+201847,Henry John Yeend-King,A COUNTRY WALK,-not sold-,0,262,393,Signed Lower Right,"7.87"" x 11.81",not given,47,25 Blythe Road Ltd.,10/17/18,0.170212766,718
+201848,Nicolas-Toussaint Charlet,DRUMMER BOY FROM THE 75th HIGHLAND REGIMENT,106,1,105,157,Signed Lower Right,"10.47"" x 8.66",not given,48,25 Blythe Road Ltd.,10/17/18,0.166666667,718
+201849,Thomas Marie Madawaska Hemy,VIEW OF ST IVES,-not sold-,0,328,459,Signed and Dated,"14.37"" x 9.84",1890,49,25 Blythe Road Ltd.,10/17/18,0.183673469,650
+201852,Consalvo Carelli,A HILLSIDE SHRINE WITH A VIEW OF THE BAY OF NAPLES AND VESUVIUS IN THE DISTANCE,-not sold-,0,525,787,Signed Lower Left,"14.57"" x 9.80",not given,52,25 Blythe Road Ltd.,10/17/18,0.173076923,650
+201859,Edward Lear,"GEBEL WARDAN, SINAI","1,383",1,787,"1,050",Inscribed,"2.95"" x 13.98",1849,59,25 Blythe Road Ltd.,10/17/18,0.152542373,650
+201860,Sen Nakabayashi,A RIVER WITH BOATS MOORED,97,1,196,328,Signed Lower Right,"18.50"" x 12.60",not given,60,25 Blythe Road Ltd.,10/17/18,0.166666667,723.3
+201861,Evgeni Kazmin,MOSAIC DESIGNS FOR A RESTAURANT IN SOCHI (2),-not sold-,0,"1,968","2,625",Signed Lower Right,Dimensions not available,not given,61,25 Blythe Road Ltd.,10/17/18,0.180327869,666.3636364
+201862,Evgeni Kazmin,MATISSE COMPOSITION,-not sold-,0,"1,050","1,575",Signed Lower Right,"17.01"" x 52.56",not given,62,25 Blythe Road Ltd.,10/17/18,0.177419355,666.3636364
+201864,Yuri Semenyuk,SPRING MOON (1981),129,1,131,196,Signed Lower Right,"12.60"" x 14.57",1981,64,25 Blythe Road Ltd.,10/17/18,0.171875,666.3636364
+201865,Yuri Andreevich Kovalenko,STILL LIFE OF FLOWERS IN A VASE,-not sold-,0,656,918,Signed Monogram,"12.60"" x 8.66",not given,65,25 Blythe Road Ltd.,10/17/18,0.184615385,621.5833333
+201866,Georg Vogt,A FARMER AND HIS COW,455,1,393,656,Signed Lower Left,"22.05"" x 28.46",not given,66,25 Blythe Road Ltd.,10/17/18,0.181818182,621.5833333
+201867,Reinholdt Nielson,HORSES PLOUGHING A FIELD,569,1,393,656,Signed Lower Right,"25.39"" x 30.71",not given,67,25 Blythe Road Ltd.,10/17/18,0.194029851,608.7692308
+201868,Carl Langhammer,COWS GRAZING IN A FIELD,-not sold-,0,787,"1,050",Signed Lower Right,"23.62"" x 27.36",not given,68,25 Blythe Road Ltd.,10/17/18,0.205882353,605.9285714
+201869,Agnes Slott-Moller,FARM BUILDINGS,292,1,262,393,Signed Lower Left,"18.62"" x 22.60",not given,69,25 Blythe Road Ltd.,10/17/18,0.202898551,605.9285714
+201870,Ib Eisner,THE CAFE IN BAKKEN,-not sold-,0,393,656,Signed Lower Left,"21.06"" x 22.64",not given,70,25 Blythe Road Ltd.,10/17/18,0.214285714,585
+201871,Werner Von Hausen,A MAID LOOKING OUT TO SEA,-not sold-,0,393,656,Signed and Dated,"12.99"" x 10.63",1919,71,25 Blythe Road Ltd.,10/17/18,0.211267606,585
+201872,Andrew Murray,PICCADILLY CIRCUS,-not sold-,0,787,"1,050",Signed Lower Right,"26.18"" x 20.28",not given,72,25 Blythe Road Ltd.,10/17/18,0.208333333,585
+201873,Andrew Murray,CAPE TOWN CATHEDRAL,651,1,393,656,Signed Lower Right,"16.73"" x 12.60",not given,73,25 Blythe Road Ltd.,10/17/18,0.205479452,585
+201874,Andrew Murray,STILL LIFE OF FLOWERS,-not sold-,0,157,236,Signed Lower Left,"5.51"" x 4.33",not given,74,25 Blythe Road Ltd.,10/17/18,0.216216216,589.125
+201875,Kenneth Rowell,STUDY,114,1,131,196,Unavailable,"10.24"" x 13.58",not given,75,25 Blythe Road Ltd.,10/17/18,0.213333333,589.125
+201876,Claude Boussin,INTERIOR OF AN ARTIST'S STUDIO,195,1,196,262,Unavailable,"12.60"" x 15.35",not given,76,25 Blythe Road Ltd.,10/17/18,0.223684211,561.1764706
+201877,Elsie Marion Henderson,STILL LIFE OF FLOWERS IN A VASE,813,1,787,"1,050",Signed Lower Left,"19.69"" x 23.94",not given,77,25 Blythe Road Ltd.,10/17/18,0.233766234,540.8333333
+201879,Pierre Andre Bouey,PROVENCAL KITCHEN,-not sold-,0,"1,968","2,625",Unavailable,"31.22"" x 44.88",not given,79,25 Blythe Road Ltd.,10/17/18,0.240506329,555.1578947
+201880,Hans Ollgaard,WOMEN SIFTING THROUGH FISHING NETS,292,1,262,393,Signed Monogram,"27.05"" x 37.40",not given,80,25 Blythe Road Ltd.,10/17/18,0.2375,555.1578947
+201881,David Remfry,ROCK'N'ROLL TEA,455,1,393,656,Signed Lower Right,"35.83"" x 28.74",not given,81,25 Blythe Road Ltd.,10/17/18,0.24691358,542
+201882,Jack Pender,WHITE PUNT I,"1,464",1,787,"1,050",Signed and Titled,"10.83"" x 12.20",not given,82,25 Blythe Road Ltd.,10/17/18,0.256097561,537.8571429
+201883,Dick Lee,"A CRICKET MATCH AT THE OVAL, 1958","2,115",1,787,"1,050",Signed Lower Right,"7.48"" x 9.25",1958,83,25 Blythe Road Ltd.,10/17/18,0.265060241,579.9545455
+201884,Fermin Rocker,A LONDON UNDERGROUND PLATFORM,"4,394",1,"1,050","1,575",Signed Lower Right,"24.02"" x 29.92",not given,84,25 Blythe Road Ltd.,10/17/18,0.273809524,646.6956522
+201885,Frederick James Porter,A RUGBY MATCH,-not sold-,0,787,"1,050",Signed on Reverse,"17.32"" x 23.62",not given,85,25 Blythe Road Ltd.,10/17/18,0.282352941,802.8333333
+201887,Henry De Buys Roessingh,BATEAU AMARRES,-not sold-,0,525,787,Unavailable,"24.41"" x 20.28",not given,87,25 Blythe Road Ltd.,10/17/18,0.275862069,802.8333333
+201888,Emily Beatrice Bland,LANDSCAPE WITH VIEW OF VILLAGE,-not sold-,0,236,288,Unavailable,"13.39"" x 23.82",not given,88,25 Blythe Road Ltd.,10/17/18,0.272727273,802.8333333
+201889,Hilda Carline,SPANISH GARDEN SCENE,585,1,525,787,Signed and Dated,"18.50"" x 25.79",1922,89,25 Blythe Road Ltd.,10/17/18,0.269662921,802.8333333
+201890,Jan Malderen,SNOW SCENE,-not sold-,0,196,328,Signed Lower Right,"19.69"" x 15.75",not given,90,25 Blythe Road Ltd.,10/17/18,0.277777778,794.12
+201891,Sylvia St George,A LADY DISTURBED WHILE BATHING,-not sold-,0,196,262,Unavailable,"15.75"" x 12.99",not given,91,25 Blythe Road Ltd.,10/17/18,0.274725275,794.12
+201893,"Mallica ""Kapo"" Reynolds",LONADSAY PORTLAND,"7,160",1,525,787,Signed and Dated,"18.50"" x 26.97",1967,93,25 Blythe Road Ltd.,10/17/18,0.268817204,794.12
+201894,Rowland Suddaby,"UPPER WHARFDALE, NORTH YORKSHIRE",422,1,393,656,Signed Lower Right,"19.69"" x 23.62",1948,94,25 Blythe Road Ltd.,10/17/18,0.276595745,1038.961538
+201895,Susan Foord,ABSTRACT LANDSCAPE,129,1,131,196,Signed Lower Right,"12.99"" x 13.78",not given,95,25 Blythe Road Ltd.,10/17/18,0.284210526,1016.111111
+201896,Giuseppe Gambino,CARABINIERI,-not sold-,0,787,"1,050",Signed and Dated,"23.62"" x 17.72",1963,96,25 Blythe Road Ltd.,10/17/18,0.291666667,984.4285714
+201897,Ernest Thesiger,MONTACUTE HOUSE (2),391,1,262,393,Unavailable,Dimensions not available,c. 1905,97,25 Blythe Road Ltd.,10/17/18,0.288659794,984.4285714
+201898,Adrian Daintrey,STILL LIFE OF FLOWERS IN A JUG,488,1,328,459,Signed Lower Left,"13.39"" x 11.42",not given,98,25 Blythe Road Ltd.,10/17/18,0.295918367,963.9655172
+201899,Alfred Robert Hayward,SUNRISE OVER LAKE,-not sold-,0,328,459,Signed Lower Left,"19.88"" x 26.38",not given,99,25 Blythe Road Ltd.,10/17/18,0.303030303,948.1
+2018101,George Belcher,A PORTRAIT SKETCH OF AUGUSTUS JOHN,-not sold-,0,262,393,Inscribed,"6.69"" x 4.72",1921,101,25 Blythe Road Ltd.,10/17/18,0.297029703,948.1
+2018102,Augustus Edwin John,A SEATED FEMALE NUDE,-not sold-,0,"1,312","1,968",Signed Lower Right,"14.17"" x 10.63",not given,102,25 Blythe Road Ltd.,10/17/18,0.294117647,948.1
+2018103,Imre Goth,"THE ARTIST'S GIRLFRIEND, BERLIN (C.1929)",-not sold-,0,328,459,Signed Monogram,"11.81"" x 18.03",not given,103,25 Blythe Road Ltd.,10/17/18,0.291262136,948.1
+2018106,"['Date:', '10/17/2018']",THE DREAM OF THE SUB-LETTER,-not sold-,0,"2,625","3,937",Signed,"16.93"" x 12.99",1926/27,106,25 Blythe Road Ltd.,10/17/18,0.283018868,948.1
+2018107,Eric Kennington,PORTRAIT OF A LADY,422,1,393,656,Signed and Dated,"10.43"" x 7.48",1909,107,25 Blythe Road Ltd.,10/17/18,0.280373832,948.1
+2018108,Laurence Preston,I GAVE / ICH GAB,-not sold-,0,131,196,Signed Lower Right,"18.70"" x 11.22",not given,108,25 Blythe Road Ltd.,10/17/18,0.287037037,931.1290323
+2018109,Frank Archer,WAR SKETCHES (2),-not sold-,0,131,196,Unavailable,Dimensions not available,not given,109,25 Blythe Road Ltd.,10/17/18,0.28440367,931.1290323
+2018110,Herbert Hampton,DESIGNS FOR A MEMORIAL TO EARL HAIG,-not sold-,0,393,656,Unavailable,"14.57"" x 9.92",not given,110,25 Blythe Road Ltd.,10/17/18,0.281818182,931.1290323
+2018111,Edward Stott,STUDY FOR THE WATERING PLACE,-not sold-,0,328,459,Unavailable,"8.07"" x 11.42",not given,111,25 Blythe Road Ltd.,10/17/18,0.279279279,931.1290323
+2018112,Edmund Pink,A DESIGN FOR A CENOTAPH,-not sold-,0,328,459,Unavailable,"14.57"" x 20.08",not given,112,25 Blythe Road Ltd.,10/17/18,0.276785714,931.1290323
+2018113,Roland Vivian Pitchforth,"ZULU SHOPPERS AT A MARKET STALL, SOUTH AFRICA",-not sold-,0,393,656,Signed Lower Right,"16.93"" x 13.98",1946,113,25 Blythe Road Ltd.,10/17/18,0.274336283,931.1290323
+2018118,Donald Fraser Gould McGill,A POSTCARD DESIGN,292,1,262,393,Inscribed,"10.04"" x 7.28",not given,118,25 Blythe Road Ltd.,10/17/18,0.262711864,931.1290323
+2018119,Donald Fraser Gould McGill,DESIGN FOR A VALENTINES POSTCARD,292,1,262,393,Inscribed,"10.63"" x 6.69",not given,119,25 Blythe Road Ltd.,10/17/18,0.268907563,911.15625
+2018120,Alan Davie,DANTES,-not sold-,0,525,787,Signed and Dated,"10.04"" x 6.89",1970,120,25 Blythe Road Ltd.,10/17/18,0.275,892.3939394
+2018121,William Gear,"UNTITLED - BLUE AND BLACK & UNTITLED - RED, BLUE AND BLACK (2)",455,1,393,656,Unavailable,Dimensions not available,not given,121,25 Blythe Road Ltd.,10/17/18,0.272727273,892.3939394
+2018122,Charles Walter Simpson,"RIDERLESS HORSES AT BEECHES BROOK, GRAND NATIONAL",292,1,262,393,Unavailable,"14.57"" x 21.46",not given,122,25 Blythe Road Ltd.,10/17/18,0.278688525,879.5294118
+2018123,Ethelbert White,A TRACK THROUGH OPEN COUNTRY,-not sold-,0,393,656,Signed Lower Right,"10.24"" x 13.39",not given,123,25 Blythe Road Ltd.,10/17/18,0.284552846,862.7428571
+2018124,Will Roberts,STONELEIGH PARISH CHURCH (ST MARY THE VIRGIN),129,1,131,196,Inscribed and Signed,"14.76"" x 10.63",1945,124,25 Blythe Road Ltd.,10/17/18,0.282258065,862.7428571
+2018125,Will Roberts,WARWICKSHIRE FARM,-not sold-,0,131,196,Signed Lower Left,"10.63"" x 14.76",1945,125,25 Blythe Road Ltd.,10/17/18,0.288,842.3611111
+2018126,Marjorie Cox,TESS AND BELLA,-not sold-,0,131,196,Unavailable,"23.23"" x 25.59",not given,126,25 Blythe Road Ltd.,10/17/18,0.285714286,842.3611111
+2018127,Marjorie Cox,COURTRAI MARY LOU,292,1,262,393,Signed and Dated,"13.50"" x 16.54",not given,127,25 Blythe Road Ltd.,10/17/18,0.283464567,842.3611111
+2018128,Marjorie Cox,C.H. ROBINSON CRUSOE OF COURTRAI,292,1,262,393,Signed and Dated,"13.74"" x 17.01",not given,128,25 Blythe Road Ltd.,10/17/18,0.2890625,827.4864865
+2018129,Marjorie Cox,TOPWIG TINA (TRACEY),-not sold-,0,262,393,Signed and Dated,"15.51"" x 18.50",not given,129,25 Blythe Road Ltd.,10/17/18,0.294573643,813.3947368
+2018132,Richard Barrett Talbot Kelly,"STILT, SPAIN",228,1,131,196,Unavailable,"8.66"" x 8.66",not given,132,25 Blythe Road Ltd.,10/17/18,0.287878788,813.3947368
+2018133,Frank Archer,A SCENE IN WEST SUSSEX,-not sold-,0,131,196,Unavailable,"12.99"" x 14.57",not given,133,25 Blythe Road Ltd.,10/17/18,0.293233083,798.3846154
+2018137,Adrian Daintrey,CHARTWELL,-not sold-,0,262,393,Signed and Titled,"13.19"" x 15.35",not given,137,25 Blythe Road Ltd.,10/17/18,0.284671533,798.3846154
+2018138,Adrian Daintrey,TELHAM PLACE,-not sold-,0,196,328,Signed and Titled,"13.78"" x 20.47",1972,138,25 Blythe Road Ltd.,10/17/18,0.282608696,798.3846154
