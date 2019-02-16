@@ -18,7 +18,7 @@ driver.find_element_by_xpath('//*[@id="menu-item-37"]/a').click()
 
 labels = ["idd", "city", "exhibition", "artist", "title", "price", "sold", "auction_fee", "avg_estimate", "signed", "area", \
 				"volume", "year_created", "auction_lot", "auction_house", "auction_date", "rate_sold_before", \
-				"avg_price_sold_before", "num_artworks", "avg_price_sold", "num_artists", "sale_rate"]
+				"avg_price_sold_before", "num_artworks", "avg_price_sold", "num_artists", "sale_rate", "img_url"]
 
 features = ["Artist:", "Title:", "Price*", "Low Estimate:", "High Estimate:", "Signature:", "Size:", \
 				"Created:", "Auction Lot:", "Auction Date:", "Medium:"] 

@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import urllib
+# import urllib
 
 def find(my_string, item):
 	return [i for i, x in enumerate(my_string) if x == item]
@@ -283,9 +283,11 @@ def get_auction_data(driver, labels, features, city, auction_house, exhibition):
 			avg_price_sold = 0
 			sold_before = float(auctions_sold) / int(artwork_count)
 
+			img_url = artwork.find_element_by_tag_name('img').get_attribute("src")
+
 			artwork_data = [idd, city, exhibition, artist, title, price, sold, auction_fee, avg_estimate, signed, area, \
 				volume, year_created, auction_lot, auction_house, auction_date, sold_before, \
-				auctions_average, num_artworks, avg_price_sold, num_artists, sale_rate]
+				auctions_average, num_artworks, avg_price_sold, num_artists, sale_rate, img_url]
 
 			exhibition_data.append(artwork_data)
 
@@ -297,13 +299,8 @@ def get_auction_data(driver, labels, features, city, auction_house, exhibition):
 
 			artwork_count += 1 # update total counter
 
-			url = artwork.find_element_by_tag_name('img').get_attribute("src")
-
-			urllib.urlretrieve(url, "local-filename.jpg")
-
-			# print (img.get_attribute('outerHTML').encode('ascii', 'ignore'))
-
-
+			# dest = "images/" + "-".join(city.split()) + "/" + idd + ".jpg"
+			# urllib.urlretrieve(url, dest)
 
 			# # open picture 
 			# driver.find_element_by_xpath('//*[@id="LeftColumn"]/div[2]/table/tbody/tr['+ str(2*(i+1)) + ']/td[1]/a[2]').click()
