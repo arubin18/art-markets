@@ -3,7 +3,6 @@ id,id,initials + auction year + auction lot (e.g. AW2O18264)
 peak month,binary,"1 if fall or spring, 0 otherwise"
 sold,binary,"1 if sold, 0 otherwise"
 auction fee,binary,price includes auction fee
-buyer's premium,continuous,
 average estimate,continuous,average of low and high estimates
 created year,discrete,year artwork was created
 auction year,discrete,year of the auction
@@ -28,3 +27,5 @@ artist,factor,name of the artist
 dead,binary,"1 if the artist is deceased at time of auction, 0 otherwise"
 homes,discrete,how many times the artwork was given to a different provenance
 signature ,binary,"1 if the artist signed the artwork, 0 otherwise"
+average sold before,continuous,average price of artworks sold before the current lot
+sold before,continuous (0 < x < 1),number of artwork sold before the current lot divided the number of artworks visited before the current lot
