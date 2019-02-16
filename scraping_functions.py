@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-# import urllib
+import numpy as np
 
 def find(my_string, item):
 	return [i for i, x in enumerate(my_string) if x == item]
@@ -107,9 +107,17 @@ def get_auction_data(driver, labels, features, city, auction_house, exhibition):
 	auctions_average = 0 # average price of auctions sold before the current lot
 	artwork_count = 1 # lots explored in the auction so far
 	artist_counter = {}
+	vol = 0 # volatility 
+	total_vol = 0
+	num_artworks = 0
+	num_artists = 0
+	sale_rate = 0
+	avg_price_sold = 0
 	
 	### iterate through each artwork
 	exhibition_data = []
+
+	prices = [] # prices for artworks in exhbitiion
 
 	artworks = get_artworks(driver)
 	# total = len(artworks)
@@ -277,17 +285,14 @@ def get_auction_data(driver, labels, features, city, auction_house, exhibition):
 			else:
 				signed = 0
 
-			num_artworks = 0
-			num_artists = 0
-			sale_rate = 0
-			avg_price_sold = 0
 			sold_before = float(auctions_sold) / int(artwork_count)
 
 			img_url = artwork.find_element_by_tag_name('img').get_attribute("src")
 
 			artwork_data = [idd, city, exhibition, artist, title, price, sold, auction_fee, avg_estimate, signed, area, \
 				volume, year_created, auction_lot, auction_house, auction_date, sold_before, \
-				auctions_average, num_artworks, avg_price_sold, num_artists, sale_rate, img_url]
+				auctions_average, num_artworks, avg_price_sold, num_artists, sale_rate, img_url, \
+				vol, total_vol]
 
 			exhibition_data.append(artwork_data)
 
@@ -295,6 +300,9 @@ def get_auction_data(driver, labels, features, city, auction_house, exhibition):
 			if sold == 1:
 				auctions_sold += 1
 				auctions_total += int(price)
+				prices.append(int(price))
+				vol = np.std(prices) # volatility 
+
 				auctions_average = float(auctions_total) / auctions_sold
 
 			artwork_count += 1 # update total counter
@@ -314,12 +322,15 @@ def get_auction_data(driver, labels, features, city, auction_house, exhibition):
 	avg_price_sold_index = labels.index("avg_price_sold")
 	num_artists_index = labels.index("num_artists")
 	sale_rate_index = labels.index("sale_rate")
+	total_vol_index = labels.index("volatility")
 
 	num_artists = len(artist_counter.keys())
 
 	sale_rate = float(auctions_sold) / artwork_count
 
 	for i in range(0,len(exhibition_data)):
+
+		exhibition_data[i][total_vol_index] = vol
 
 		exhibition_data[i][sale_rate_index] = sale_rate
 

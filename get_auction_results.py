@@ -18,7 +18,8 @@ driver.find_element_by_xpath('//*[@id="menu-item-37"]/a').click()
 
 labels = ["idd", "city", "exhibition", "artist", "title", "price", "sold", "auction_fee", "avg_estimate", "signed", "area", \
 				"volume", "year_created", "auction_lot", "auction_house", "auction_date", "rate_sold_before", \
-				"avg_price_sold_before", "num_artworks", "avg_price_sold", "num_artists", "sale_rate", "img_url"]
+				"avg_price_sold_before", "num_artworks", "avg_price_sold", "num_artists", "sale_rate", "img_url", \
+				"volatility_before", "volatility"]
 
 features = ["Artist:", "Title:", "Price*", "Low Estimate:", "High Estimate:", "Signature:", "Size:", \
 				"Created:", "Auction Lot:", "Auction Date:", "Medium:"] 
@@ -52,8 +53,7 @@ for i in range(total):
 	enter_city(driver, city)
 
 
-f_name = "-".join(city.split()).lower()
-dest = "/datasets/" + f_name + "/" + f_name + ".csv"
+dest = "/datasets/" + "_".join(city.split()).lower() + ".csv" # file destination
 
 with open(dest, "wb") as my_file:
 	wr = csv.writer(my_file)
