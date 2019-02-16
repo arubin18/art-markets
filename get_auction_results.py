@@ -51,9 +51,11 @@ for i in range(total):
 	# re enter city name
 	enter_city(driver, city)
 
-print (city_data)
 
-with open("_".join(city.split()) + ".csv", "wb") as my_file:
+f_name = "-".join(city.split()).lower()
+dest = "/datasets/" + f_name + "/" + f_name + ".csv"
+
+with open(dest, "wb") as my_file:
 	wr = csv.writer(my_file)
 	wr.writerows(city_data)
 

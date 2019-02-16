@@ -217,7 +217,7 @@ def get_auction_data(driver, labels, features, city, auction_house, exhibition):
 				
 				if len(dimensions) > 2: # more than two dimensions
 					area = str(product(dimensions[:-1]))
-					volume = 1
+					volume =  str(product(dimensions))
 				
 				else: 
 					area = str(product(dimensions))
