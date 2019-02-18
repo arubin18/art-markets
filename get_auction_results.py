@@ -43,49 +43,47 @@ key = "contemporary"
 
 enter_city(driver, city)
 
-city_data = [labels] # array to hold artwork data for a particular city
+# city_data = [labels] # array to hold artwork data for a particular city
 auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
 dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
 
-start = 5
-end = 6
-
-for i in range(start, end):
-
-	try:
-
-		auction_houses = get_auction_houses(driver)
-		auction_house = auction_houses[i]
-		auction_house_name = auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').text.encode('ascii', 'ignore')
-
-		print (auction_house_name)
-
-		# open exhibitions for auction house 
-		auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
-		
-		# find auctions option
-		gallery_menu = driver.find_element_by_xpath('//*[@id="GalleryMenu"]')
-		options = gallery_menu.find_elements_by_class_name("dealermenu")
-		auction_index = [i for i in range(len(options)) if options[i].text == "Auctions"][0]
-		options[auction_index].click()
-
-		city_data += get_auction_house_data(features, key, driver, city, auction_house_name)
-
-		# leave auction house
-		driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
-
-		# re enter city name
-		enter_city(driver, city)
-
-	except:
-
-		with open(dest, "wb") as my_file:
-			wr = csv.writer(my_file)
-			wr.writerows(city_data)
-
-		break 
+start = 6
+end = total
 
 with open(dest, "wb") as my_file:
 	wr = csv.writer(my_file)
-	wr.writerows(city_data)
+	wr.writerows(labels)
+
+for i in range(start, end):
+
+	auction_houses = get_auction_houses(driver)
+	auction_house = auction_houses[i]
+	auction_house_name = auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').text.encode('ascii', 'ignore')
+
+	print (auction_house_name)
+
+	# open exhibitions for auction house 
+	auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
+	
+	# find auctions option
+	gallery_menu = driver.find_element_by_xpath('//*[@id="GalleryMenu"]')
+	options = gallery_menu.find_elements_by_class_name("dealermenu")
+	auction_index = [i for i in range(len(options)) if options[i].text == "Auctions"][0]
+	options[auction_index].click()
+
+	auction_house_data = get_auction_house_data(features, key, driver, city, auction_house_name)
+
+	# leave auction house
+	driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
+
+	# re enter city name
+	enter_city(driver, city)
+
+	with open(dest, "a") as my_file:
+		wr = csv.writer(my_file)
+		wr.writerows(auction_house_data)
+
+
+
+
