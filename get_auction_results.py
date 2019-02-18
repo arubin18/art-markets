@@ -6,7 +6,7 @@ import csv
 
 ### changing page load strategy 
 caps = DesiredCapabilities().CHROME
-caps["pageLoadStrategy"] = "normal"  #  complete
+caps["pageLoadStrategy"] = "normal"  # complete
 
 ### logging into MFA
 driver = webdriver.Chrome(desired_capabilities=caps, executable_path="/usr/local/bin/chromedriver")
@@ -16,54 +16,72 @@ driver.get("http://www.askart.com/")
 driver.find_element_by_xpath('//*[@id="menu-item-3"]/a').click()
 driver.find_element_by_xpath('//*[@id="menu-item-37"]/a').click()
 
-labels = ["idd", "city", "exhibition", "artist", "title", "price", "sold", "auction_fee", "avg_estimate", "signed", "area", \
-				"volume", "year_created", "auction_lot", "auction_house", "auction_date", "rate_sold_before", \
-				"avg_price_sold_before", "num_artworks", "avg_price_sold", "num_artists", "sale_rate", "img_url", \
-				"volatility_before", "volatility"]
+# labels = ["idd", "city", "exhibition", "artist", "title", "price", "sold", "auction_fee", "avg_estimate", "signed", "area", \
+# 				"volume", "year_created", "auction_lot", "auction_house", "auction_date", "rate_sold_before", \
+# 				"avg_price_sold_before", "num_artworks", "avg_price_sold", "num_artists", "sale_rate", "img_url", \
+# 				"volatility_before", "volatility", "skew_before", "skew"]
 
 features = ["Artist:", "Title:", "Price*", "Low Estimate:", "High Estimate:", "Signature:", "Size:", \
 				"Created:", "Auction Lot:", "Auction Date:", "Medium:"] 
 
+# cities = ["Hong Kong", "Tokyo", "Seoul", "Shanghai"]
+
+labels = ["city", "auction_house", "exhibition", "image_url", "artist", "title", "price", "low_estimate", \
+	"signature", "size", "created", "auction_lot", "auction_date", "medium"]
+
+# labels = ["city", "auction_house"exhibition_date, "exhibition", "image_url", "info_array"]
+
 city = "New York"
-enter_city(driver, city)
 
 key = "contemporary"
 
+enter_city(driver, city)
+
 city_data = [labels] # array to hold artwork data for a particular city
 auction_houses = get_auction_houses(driver)
-# total = len(auction_houses)
-total = 1
+total = len(auction_houses)
+# dest = "datasets/" + "_".join(city.split()).lower() + ".csv" # file destination
+# dest = "datasets/christies.csv"
+# start = 0
 
-for i in range(total):
+start = 4
+end = 5
 
-	auction_houses = get_auction_houses(driver)
-	auction_house = auction_houses[i]
-	auction_house_name = auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').text.encode('ascii', 'ignore')
+for i in range(start, end):
 
-	# open exhibitions for auction house 
-	auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
-	driver.find_element_by_xpath('//*[@id="GalleryMenu"]/a[1]').click()
+	try:
 
-	city_data += get_auction_house_data(key, driver, labels, features, city, auction_house_name)
+		auction_houses = get_auction_houses(driver)
+		auction_house = auction_houses[i]
+		auction_house_name = auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').text.encode('ascii', 'ignore')
 
-	# leave auction house
-	driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
+		print (auction_house_name)
 
-	# re enter city name
-	enter_city(driver, city)
+		# open exhibitions for auction house 
+		auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
+		
+		# find auctions option
+		gallery_menu = driver.find_element_by_xpath('//*[@id="GalleryMenu"]')
+		options = gallery_menu.find_elements_by_class_name("dealermenu")
+		auction_index = [i for i in range(len(options)) if options[i].text == "Auctions"][0]
+		options[auction_index].click()
 
+		city_data += get_auction_house_data(features, key, driver, city, auction_house_name)
 
-dest = "/datasets/" + "_".join(city.split()).lower() + ".csv" # file destination
+		# leave auction house
+		driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
+
+		# re enter city name
+		enter_city(driver, city)
+
+	except:
+
+		with open(dest, "wb") as my_file:
+			wr = csv.writer(my_file)
+			wr.writerows(city_data)
+
+		break 
 
 with open(dest, "wb") as my_file:
 	wr = csv.writer(my_file)
 	wr.writerows(city_data)
-
-
-
-
-
-
-
-
-
