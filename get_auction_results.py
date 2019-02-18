@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from scraping_functions import *
 import csv
@@ -8,7 +9,12 @@ import csv
 caps = DesiredCapabilities().CHROME
 caps["pageLoadStrategy"] = "normal"  # complete
 
-### logging into MFA
+# chrome_options = Options()
+# chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--proxy-server='direct://'");
+# chrome_options.add_argument("--proxy-bypass-list=*");
+
+### logging into MFA 
 driver = webdriver.Chrome(desired_capabilities=caps, executable_path="/usr/local/bin/chromedriver")
 driver.get("http://www.askart.com/")
 
@@ -40,12 +46,10 @@ enter_city(driver, city)
 city_data = [labels] # array to hold artwork data for a particular city
 auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
-# dest = "datasets/" + "_".join(city.split()).lower() + ".csv" # file destination
-# dest = "datasets/christies.csv"
-# start = 0
+dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
 
-start = 4
-end = 5
+start = 5
+end = 8
 
 for i in range(start, end):
 
