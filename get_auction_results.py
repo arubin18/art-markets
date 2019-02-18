@@ -15,7 +15,7 @@ caps["pageLoadStrategy"] = "normal"  # complete
 # chrome_options.add_argument("--proxy-bypass-list=*");
 
 ### logging into MFA 
-driver = webdriver.Chrome(desired_capabilities=caps, executable_path="/usr/local/bin/chromedriver")
+driver = webdriver.Chrome(desired_capabilities=caps, executable_path="/usr/lib/chromium-browser/chromedriver")
 driver.get("http://www.askart.com/")
 
 ### go to directory of auction houses
@@ -49,7 +49,7 @@ total = len(auction_houses)
 dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
 
 start = 5
-end = 8
+end = 6
 
 for i in range(start, end):
 

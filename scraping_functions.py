@@ -1,7 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import numpy as np
-import scipy.stats
 
 def find(my_string, item):
 	return [i for i, x in enumerate(my_string) if x == item]
