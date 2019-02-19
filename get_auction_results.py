@@ -30,8 +30,6 @@ driver.find_element_by_xpath('//*[@id="menu-item-37"]/a').click()
 features = ["Artist:", "Title:", "Price*", "Low Estimate:", "High Estimate:", "Signature:", "Size:", \
 				"Created:", "Auction Lot:", "Auction Date:", "Medium:"] 
 
-# cities = ["Hong Kong", "Tokyo", "Seoul", "Shanghai"]
-
 labels = ["city", "auction_house", "exhibition", "image_url", "artist", "title", "price", "low_estimate", \
 	"signature", "size", "created", "auction_lot", "auction_date", "medium"]
 
@@ -48,12 +46,12 @@ auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
 dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
 
-start = 6
+start = 14
 end = total
 
 with open(dest, "wb") as my_file:
 	wr = csv.writer(my_file)
-	wr.writerows(labels)
+	wr.writerows([labels])
 
 for i in range(start, end):
 
@@ -65,12 +63,20 @@ for i in range(start, end):
 
 	# open exhibitions for auction house 
 	auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
-	
-	# find auctions option
-	gallery_menu = driver.find_element_by_xpath('//*[@id="GalleryMenu"]')
-	options = gallery_menu.find_elements_by_class_name("dealermenu")
-	auction_index = [i for i in range(len(options)) if options[i].text == "Auctions"][0]
-	options[auction_index].click()
+        try:	
+	    # find auctions option
+	    gallery_menu = driver.find_element_by_xpath('//*[@id="GalleryMenu"]')
+	    options = gallery_menu.find_elements_by_class_name("dealermenu")
+	    auction_index = [i for i in range(len(options)) if options[i].text == "Auctions"][0]
+	    options[auction_index].click()
+
+        except:
+            # leave auction house
+            driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
+
+            # re enter city name
+            enter_city(driver, city)
+            continue
 
 	auction_house_data = get_auction_house_data(features, key, driver, city, auction_house_name)
 
