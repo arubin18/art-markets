@@ -75,7 +75,7 @@ def get_auction_house_data(features, key, driver, city, auction_house):
 
 def get_exhibition_data(features, driver, city, auction_house, exhibition):
 
-	set_records_per_page(driver)
+    #	set_records_per_page(driver)
 
 	num_page = get_page_numbers(driver) # number of pages
 	current_page = 1

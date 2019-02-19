@@ -48,7 +48,7 @@ auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
 dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
 
-start = 6
+start = 11
 end = total
 
 with open(dest, "wb") as my_file:
