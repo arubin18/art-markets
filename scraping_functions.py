@@ -75,7 +75,7 @@ def get_auction_house_data(features, key, driver, city, auction_house):
 
 def get_exhibition_data(features, driver, city, auction_house, exhibition):
 
-    #	set_records_per_page(driver)
+        set_records_per_page(driver)
 
 	num_page = get_page_numbers(driver) # number of pages
 	current_page = 1
@@ -164,6 +164,12 @@ def get_page_numbers(driver):
 
 def set_records_per_page(driver):
 	# set records per page to 100
-	driver.find_element_by_xpath("//*[@id='AuctionRecordFilter']/table/tbody/tr[2]/td[2]/div").click()
-	driver.find_element_by_xpath("//*[@id='AuctionRecordFilter']/table/tbody/tr[2]/td[2]/div/div[2]/div/div[5]").click()
+
+        try:
+	    driver.find_element_by_xpath("//*[@id='AuctionRecordFilter']/table/tbody/tr[2]/td[2]/div").click()
+	    driver.find_element_by_xpath("//*[@id='AuctionRecordFilter']/table/tbody/tr[2]/td[2]/div/div[2]/div/div[5]").click()
+        except:
+            pass 
+
+
 

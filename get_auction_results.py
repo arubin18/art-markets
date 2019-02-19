@@ -30,8 +30,6 @@ driver.find_element_by_xpath('//*[@id="menu-item-37"]/a').click()
 features = ["Artist:", "Title:", "Price*", "Low Estimate:", "High Estimate:", "Signature:", "Size:", \
 				"Created:", "Auction Lot:", "Auction Date:", "Medium:"] 
 
-# cities = ["Hong Kong", "Tokyo", "Seoul", "Shanghai"]
-
 labels = ["city", "auction_house", "exhibition", "image_url", "artist", "title", "price", "low_estimate", \
 	"signature", "size", "created", "auction_lot", "auction_date", "medium"]
 
@@ -48,12 +46,12 @@ auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
 dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
 
-start = 11
+start = 13
 end = total
 
 with open(dest, "wb") as my_file:
 	wr = csv.writer(my_file)
-	wr.writerows(labels)
+	wr.writerows([labels])
 
 for i in range(start, end):
 
