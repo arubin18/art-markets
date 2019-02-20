@@ -31,11 +31,11 @@ features = ["Artist:", "Title:", "Price*", "Low Estimate:", "High Estimate:", "S
 				"Created:", "Auction Lot:", "Auction Date:", "Medium:"] 
 
 labels = ["city", "auction_house", "exhibition", "image_url", "artist", "title", "price", "low_estimate", \
-	"signature", "size", "created", "auction_lot", "auction_date", "medium"]
+	"high_estimate", "signature", "size", "created", "auction_lot", "auction_date", "medium"]
 
 # labels = ["city", "auction_house"exhibition_date, "exhibition", "image_url", "info_array"]
 
-city = "New York"
+city = "london"
 
 key = "contemporary"
 
@@ -46,7 +46,7 @@ auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
 dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
 
-start = 14
+start = 0
 end = total
 
 with open(dest, "wb") as my_file:
@@ -63,6 +63,7 @@ for i in range(start, end):
 
 	# open exhibitions for auction house 
 	auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
+        
         try:	
 	    # find auctions option
 	    gallery_menu = driver.find_element_by_xpath('//*[@id="GalleryMenu"]')
