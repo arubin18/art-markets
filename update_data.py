@@ -9,11 +9,11 @@ labels = ["idd", "city", "exhibition", "artist", "title", "price", "sold", "avg_
 				"avg_price_sold_before", "num_artworks", "avg_price_sold", "num_artists", "sale_rate", "img_url", \
 				"volatility_before", "volatility", "skew_before", "skew"]
 
-city = "New York"
+city = "London"
 # parse_data(city, labels)
 # download_images(city)
-# update_prices(city)
-# add_features(city)
+update_prices(city)
+add_features(city)
 
 
 

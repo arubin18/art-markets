@@ -78,8 +78,15 @@ def clean_data(data, labels):
 
 		new_elements = new_elements[:11]
 
-		artist, title, price, low_estimate, high_estimate, signed, area, \
-		year_created, auction_lot, auction_date, medium = new_elements
+		try:
+
+			artist, title, price, low_estimate, high_estimate, signed, area, \
+			year_created, auction_lot, auction_date, medium = new_elements
+
+		except:
+			# print (info)
+			# print (new_elements)
+			continue
 
 		auction_lot = auction_lot.split()[0] # get rid of words following the lot number
 
