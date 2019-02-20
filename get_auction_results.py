@@ -35,7 +35,7 @@ labels = ["city", "auction_house", "exhibition", "image_url", "artist", "title",
 
 # labels = ["city", "auction_house"exhibition_date, "exhibition", "image_url", "info_array"]
 
-city = "New York"
+city = "London"
 
 key = "contemporary"
 
@@ -46,7 +46,7 @@ auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
 dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
 
-start = 14
+start = 0
 end = total
 
 with open(dest, "wb") as my_file:
