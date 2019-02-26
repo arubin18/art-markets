@@ -18,10 +18,9 @@ def parse_data(city, labels):
 	def get_sales_for_exhibition(exhibition, contents):
 		return [content for content in contents if content[2] == exhibition]
 
-	for line in contents[start:]:
+	for line in contents:
 		sale = line.strip("\n").split(",")
 		city = sale[0]
-
 
 		first_quote = 1
 
@@ -64,7 +63,6 @@ def parse_data(city, labels):
 		sales = get_sales_for_exhibition(exhibition, new_contents)
 
 		vals = [sale for sale in sales]
-
 
 		exhibition_data = clean_data(sales, labels)
 
