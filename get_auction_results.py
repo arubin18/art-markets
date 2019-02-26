@@ -16,6 +16,7 @@ caps["pageLoadStrategy"] = "normal"  # complete
 
 ### logging into MFA 
 driver = webdriver.Chrome(desired_capabilities=caps, executable_path="/usr/lib/chromium-browser/chromedriver")
+# driver = webdriver.Chrome(desired_capabilities=caps, executable_path="/usr/local/bin/chromedriver")
 driver.get("http://www.askart.com/")
 
 ### go to directory of auction houses
@@ -31,17 +32,26 @@ features = ["Artist:", "Title:", "Price*", "Low Estimate:", "High Estimate:", "S
 				"Created:", "Auction Lot:", "Auction Date:", "Medium:"] 
 
 labels = ["city", "auction_house", "exhibition", "image_url", "artist", "title", "price", "low_estimate", \
-	"signature", "size", "created", "auction_lot", "auction_date", "medium"]
+	"high_estimate", "signature", "size", "created", "auction_lot", "auction_date", "medium"]
 
 # labels = ["city", "auction_house"exhibition_date, "exhibition", "image_url", "info_array"]
 
-city = "London"
+city = "paris"
 
 key = "contemporary"
 
 enter_city(driver, city)
 
-# city_data = [labels] # array to hold artwork data for a particular city
+### get page numbers
+try:
+	page_info = driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').get_attribute('outerHTML').encode('ascii', 'ignore')
+	num_page = int(page_info.split(" ")[1].split("=")[-1][:-1])
+	extra = True # boolean indicating extra pages 
+
+except:
+	num_page = 1
+	extra = False
+
 auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
 dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
@@ -53,42 +63,52 @@ with open(dest, "wb") as my_file:
 	wr = csv.writer(my_file)
 	wr.writerows([labels])
 
-for i in range(start, end):
+for j in range(num_page):
 
-	auction_houses = get_auction_houses(driver)
-	auction_house = auction_houses[i]
-	auction_house_name = auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').text.encode('ascii', 'ignore')
+	for i in range(start, end):
 
-	print (auction_house_name)
+		auction_houses = get_auction_houses(driver)
+		auction_house = auction_houses[i]
+		auction_house_name = auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').text.encode('ascii', 'ignore')
 
-	# open exhibitions for auction house 
-	auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
-        try:	
-	    # find auctions option
-	    gallery_menu = driver.find_element_by_xpath('//*[@id="GalleryMenu"]')
-	    options = gallery_menu.find_elements_by_class_name("dealermenu")
-	    auction_index = [i for i in range(len(options)) if options[i].text == "Auctions"][0]
-	    options[auction_index].click()
+		print (auction_house_name)
 
-        except:
-            # leave auction house
-            driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
+		# open exhibitions for auction house 
+		auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
+	        
+	        try:	
+		    # find auctions option
+		    gallery_menu = driver.find_element_by_xpath('//*[@id="GalleryMenu"]')
+		    options = gallery_menu.find_elements_by_class_name("dealermenu")
+		    auction_index = [i for i in range(len(options)) if options[i].text == "Auctions"][0]
+		    options[auction_index].click()
 
-            # re enter city name
-            enter_city(driver, city)
-            continue
+	        except:
+	            # leave auction house
+	            driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
 
-	auction_house_data = get_auction_house_data(features, key, driver, city, auction_house_name)
+	            # re enter city name
+	            enter_city(driver, city)
+	            continue
 
-	# leave auction house
-	driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
+		auction_house_data = get_auction_house_data(features, key, driver, city, auction_house_name)
 
-	# re enter city name
-	enter_city(driver, city)
+		# leave auction house
+		driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
 
-	with open(dest, "a") as my_file:
-		wr = csv.writer(my_file)
-		wr.writerows(auction_house_data)
+		# re enter city name
+		enter_city(driver, city)
+
+		with open(dest, "a") as my_file:
+			wr = csv.writer(my_file)
+			wr.writerows(auction_house_data)
+
+	if j == num_page - 1: # last page
+		break
+
+	# if extra pages, go to the next page 
+	if extra:
+		driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
 
 
 

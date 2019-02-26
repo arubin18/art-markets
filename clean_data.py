@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.stats
+import uuid
 
 def product (my_list):
 	return reduce(lambda x, y: x*y, my_list)
@@ -78,8 +79,15 @@ def clean_data(data, labels):
 
 		new_elements = new_elements[:11]
 
-		artist, title, price, low_estimate, high_estimate, signed, area, \
-		year_created, auction_lot, auction_date, medium = new_elements
+		try:
+
+			artist, title, price, low_estimate, high_estimate, signed, area, \
+			year_created, auction_lot, auction_date, medium = new_elements
+
+		except:
+			# print (info)
+			# print (new_elements)
+			continue
 
 		auction_lot = auction_lot.split()[0] # get rid of words following the lot number
 
@@ -181,13 +189,15 @@ def clean_data(data, labels):
 			auction_date = auction_date.split("-")[0]
 
 		# get year
-		auction_date_year = auction_date.split("/")[2]
+		# auction_date_info = auction_date.split("/")
+		# auction_date_year = auction_date.split("/")[2]
 
-		name_info = artist.split()
-		first = name_info[0]
-		last = name_info[-1]
-		initials = first[0] + last[0]
-		idd = initials + auction_date_year + auction_lot
+		# name_info = artist.split()
+		# first = name_info[0]
+		# last = name_info[-1]
+		# initials = first[0] + last[0]
+		
+		idd = uuid.uuid4().hex
 
 		# clean up year created variable 
 
@@ -231,7 +241,7 @@ def clean_data(data, labels):
 		artwork_data = [idd, city, exhibition, artist, title, price, sold, avg_estimate, signed, area, \
 			volume, year_created, auction_lot, auction_house, auction_date, sold_before, \
 			auctions_average, num_artworks, avg_price_sold, num_artists, sale_rate, img_url, \
-			vol, total_vol, skew, total_skew]
+			vol, total_vol, skew, total_skew, medium]
 
 		exhibition_data.append(artwork_data)
 

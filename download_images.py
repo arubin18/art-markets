@@ -13,13 +13,15 @@ def download_images(city):
 
 	img_index = labels.index("img_url")
 
-	for i in range(18860,size):
+	for i in range(16616,size):
+
+		print (i)
 
 		row = data[i].split(",")
 		idd = row[0]
 		url = row[img_index]
 
-		dest = "images/new-york/" + idd + ".jpg"
+		dest = "images/" + "-".join(city.split()).lower() + "/" + idd + ".jpg"
 
 		try:
 

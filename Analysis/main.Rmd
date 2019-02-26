@@ -1,0 +1,75 @@
+---
+title: "main"
+output: html_document
+---
+
+## load libaries  
+
+```{r setup, include=FALSE}
+
+library(magrittr)
+library(dplyr)
+library(feather)
+library(stringr)
+
+```
+
+## import data from file and save to feather
+
+```{r setup, include=FALSE}
+
+MyData <- read.csv(file="~/Art-Markets/Analysis/whole_data.csv", header=TRUE, sep=",")
+
+path <- "dataset.feather"
+
+write_feather(MyData, path)
+
+```
+
+## load data using feather
+
+```{r setup, include=FALSE}
+
+MyData <- read_feather(path)
+
+```
+
+
+## apply constraints to the data
+
+```{r setup, include=FALSE}
+
+MyData <- read_feather(path)
+
+MyData$year_created = strtoi(MyData$year_created)
+MyData$sold = strtoi(MyData$sold)
+
+# year created between 1950 and 1980, no volume, on canvas, and with four medium factors
+MyData %<>%
+  filter(year_created >= 1950 & year_created < 1980) %>%
+  filter(volume == 0) %>%
+  filter(str_detect(medium, "Canvas") | str_detect(medium, "Paper")) %>%
+  filter(str_detect(medium, "Oil") | str_detect(medium, "Acrylic")) %>%
+  # do not look at mediums with extra elements 
+  filter(!str_detect(medium, "and")) %>% 
+  filter(!str_detect(medium, "or")) %>% 
+  filter(!str_detect(medium, "with")) %>%
+  mutate(paper = ifelse(str_detect(medium, "Paper"), 1, 0)) %>%
+  mutate(canvas = ifelse(str_detect(medium, "Canvas"), 1, 0)) %>%  
+  mutate(oil = ifelse(str_detect(medium, "Oil"), 1, 0)) %>%
+  mutate(acrylic = ifelse(str_detect(medium, "Acrylic"), 1, 0)) %>%
+  filter(artist_volume >= 10) %>% 
+  select(-c(medium, volume, img_url)) %>%
+  droplevels()
+
+side_feet <- sqrt(MyData$area) / 12
+
+names(MyData)[names(MyData) == 'idd'] <- 'id'
+
+MyDataSold <- MyData %>%
+  filter(sold == 1) %>%
+  select(-sold)
+
+```
+
+

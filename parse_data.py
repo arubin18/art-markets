@@ -18,31 +18,34 @@ def parse_data(city, labels):
 	def get_sales_for_exhibition(exhibition, contents):
 		return [content for content in contents if content[2] == exhibition]
 
-	for line in contents[start:]:
+	for line in contents:
 		sale = line.strip("\n").split(",")
 		city = sale[0]
 
 		first_quote = 1
 
+		# print (sale)
+
 		if "\"" == sale[1][0]:
 			first_quote = 1
-			second_quote = [i+first_quote for i in range(first_quote+1,len(sale)) if "\"" in sale[i]][0]
-			third_quote = second_quote
-			auction_house = "".join(sale[first_quote:second_quote]).strip("\"")
+			second_quote = [i for i in range(first_quote+1,len(sale)) if "\"" in sale[i]][0]
+			third_quote = second_quote+1
+			auction_house = "".join(sale[first_quote:second_quote+1]).strip("\"")
+			# print (auction_house)
 		
 		else: # no quotes
 			auction_house = sale[1]
 			third_quote = 2
 
 		if "\"" == sale[third_quote][0]:
-			fourth_quote = [i+third_quote for i in range(third_quote+1,len(sale)) if "\"" in sale[i]][0]
-			fourth_quote -= 2
+			fourth_quote = [i for i in range(third_quote+1,len(sale)) if "\"" in sale[i]][0]
 			exhibition = "".join(sale[third_quote:fourth_quote+1]).strip("\"")
 			img_index = fourth_quote+1
 
 		else:
 			exhibition = sale[third_quote]
 			img_index = third_quote+1
+
 
 		exhibitions.add(exhibition)
 		auction_houses.add(auction_house)
@@ -65,6 +68,6 @@ def parse_data(city, labels):
 
 		city_data += exhibition_data
 
-	with open("datasets/new-york/data.csv", "wb") as my_file:
+	with open("datasets/" +  "-".join(city.split()).lower() + "/" + "data.csv", "wb") as my_file:
 		wr = csv.writer(my_file)
 		wr.writerows(city_data)
