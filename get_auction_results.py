@@ -65,6 +65,9 @@ with open(dest, "wb") as my_file:
 
 for j in range(num_page):
 
+        if j == 0:
+            start = 5
+
 	for i in range(start, end):
 
 		auction_houses = get_auction_houses(driver)
