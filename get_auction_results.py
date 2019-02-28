@@ -63,10 +63,10 @@ with open(dest, "wb") as my_file:
 	wr = csv.writer(my_file)
 	wr.writerows([labels])
 
-for j in range(num_page):
+for j in range(1,num_page):
 
-        if j == 0:
-            start = 5
+        if j == 1:
+            start = 0
 
 	for i in range(start, end):
 
