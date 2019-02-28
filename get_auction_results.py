@@ -9,24 +9,13 @@ import csv
 caps = DesiredCapabilities().CHROME
 caps["pageLoadStrategy"] = "normal"  # complete
 
-# chrome_options = Options()
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--proxy-server='direct://'");
-# chrome_options.add_argument("--proxy-bypass-list=*");
-
 ### logging into MFA 
 driver = webdriver.Chrome(desired_capabilities=caps, executable_path="/usr/lib/chromium-browser/chromedriver")
-# driver = webdriver.Chrome(desired_capabilities=caps, executable_path="/usr/local/bin/chromedriver")
 driver.get("http://www.askart.com/")
 
 ### go to directory of auction houses
 driver.find_element_by_xpath('//*[@id="menu-item-3"]/a').click()
 driver.find_element_by_xpath('//*[@id="menu-item-37"]/a').click()
-
-# labels = ["idd", "city", "exhibition", "artist", "title", "price", "sold", "auction_fee", "avg_estimate", "signed", "area", \
-# 				"volume", "year_created", "auction_lot", "auction_house", "auction_date", "rate_sold_before", \
-# 				"avg_price_sold_before", "num_artworks", "avg_price_sold", "num_artists", "sale_rate", "img_url", \
-# 				"volatility_before", "volatility", "skew_before", "skew"]
 
 features = ["Artist:", "Title:", "Price*", "Low Estimate:", "High Estimate:", "Signature:", "Size:", \
 				"Created:", "Auction Lot:", "Auction Date:", "Medium:"] 
@@ -34,36 +23,23 @@ features = ["Artist:", "Title:", "Price*", "Low Estimate:", "High Estimate:", "S
 labels = ["city", "auction_house", "exhibition", "image_url", "artist", "title", "price", "low_estimate", \
 	"high_estimate", "signature", "size", "created", "auction_lot", "auction_date", "medium"]
 
-# labels = ["city", "auction_house"exhibition_date, "exhibition", "image_url", "info_array"]
-
 city = "paris"
 
-key = "contemporary"
+key = "contemp" # Contemporain for french and contemporary for english
 
 enter_city(driver, city)
-
-### get page numbers
-# try:
-# 	page_info = driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').get_attribute('outerHTML').encode('ascii', 'ignore')
-# 	num_page = int(page_info.split(" ")[1].split("=")[-1][:-1])
-# 	extra = True # boolean indicating extra pages 
-
-# except:
-# 	num_page = 1
-# 	extra = False
+# driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
 
 auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
-dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
 
 start = 0
 end = total
 
+dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
 with open(dest, "wb") as my_file:
 	wr = csv.writer(my_file)
 	wr.writerows([labels])
-
-driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
 
 for i in range(start, end):
 
@@ -89,7 +65,7 @@ for i in range(start, end):
 
             # re enter city name
             enter_city(driver, city)
-            driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
+            # driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
             continue
 
 	auction_house_data = get_auction_house_data(features, key, driver, city, auction_house_name)
@@ -99,7 +75,7 @@ for i in range(start, end):
 
 	# re enter city name
 	enter_city(driver, city)
-	driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
+	# driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
 
 	with open(dest, "a") as my_file:
 		wr = csv.writer(my_file)
