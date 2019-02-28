@@ -63,10 +63,9 @@ with open(dest, "wb") as my_file:
 	wr = csv.writer(my_file)
 	wr.writerows([labels])
 
-for j in range(1,num_page):
+driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
 
-        if j == 1:
-            start = 0
+for j in range(1,num_page):
 
 	for i in range(start, end):
 
