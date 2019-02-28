@@ -43,14 +43,14 @@ key = "contemporary"
 enter_city(driver, city)
 
 ### get page numbers
-try:
-	page_info = driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').get_attribute('outerHTML').encode('ascii', 'ignore')
-	num_page = int(page_info.split(" ")[1].split("=")[-1][:-1])
-	extra = True # boolean indicating extra pages 
+# try:
+# 	page_info = driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').get_attribute('outerHTML').encode('ascii', 'ignore')
+# 	num_page = int(page_info.split(" ")[1].split("=")[-1][:-1])
+# 	extra = True # boolean indicating extra pages 
 
-except:
-	num_page = 1
-	extra = False
+# except:
+# 	num_page = 1
+# 	extra = False
 
 auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
@@ -65,52 +65,45 @@ with open(dest, "wb") as my_file:
 
 driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
 
-for j in range(1,num_page):
+for i in range(start, end):
 
-	for i in range(start, end):
+	auction_houses = get_auction_houses(driver)
+	auction_house = auction_houses[i]
+	auction_house_name = auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').text.encode('ascii', 'ignore')
 
-		auction_houses = get_auction_houses(driver)
-		auction_house = auction_houses[i]
-		auction_house_name = auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').text.encode('ascii', 'ignore')
+	print (auction_house_name)
 
-		print (auction_house_name)
+	# open exhibitions for auction house 
+	auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
+        
+        try:	
+	    # find auctions option
+	    gallery_menu = driver.find_element_by_xpath('//*[@id="GalleryMenu"]')
+	    options = gallery_menu.find_elements_by_class_name("dealermenu")
+	    auction_index = [i for i in range(len(options)) if options[i].text == "Auctions"][0]
+	    options[auction_index].click()
 
-		# open exhibitions for auction house 
-		auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
-	        
-	        try:	
-		    # find auctions option
-		    gallery_menu = driver.find_element_by_xpath('//*[@id="GalleryMenu"]')
-		    options = gallery_menu.find_elements_by_class_name("dealermenu")
-		    auction_index = [i for i in range(len(options)) if options[i].text == "Auctions"][0]
-		    options[auction_index].click()
+        except:
+            # leave auction house
+            driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
 
-	        except:
-	            # leave auction house
-	            driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
+            # re enter city name
+            enter_city(driver, city)
+            driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
+            continue
 
-	            # re enter city name
-	            enter_city(driver, city)
-	            continue
+	auction_house_data = get_auction_house_data(features, key, driver, city, auction_house_name)
 
-		auction_house_data = get_auction_house_data(features, key, driver, city, auction_house_name)
+	# leave auction house
+	driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
 
-		# leave auction house
-		driver.find_element_by_xpath('//*[@id="RightColumn"]/table/tbody/tr/td/div/a').click()
+	# re enter city name
+	enter_city(driver, city)
+	driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
 
-		# re enter city name
-		enter_city(driver, city)
-
-		with open(dest, "a") as my_file:
-			wr = csv.writer(my_file)
-			wr.writerows(auction_house_data)
-
-	if j == num_page - 1: # last page
-		break
-
-	# if extra pages, go to the next page 
-	if extra:
-		driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
+	with open(dest, "a") as my_file:
+		wr = csv.writer(my_file)
+		wr.writerows(auction_house_data)
 
 
 
