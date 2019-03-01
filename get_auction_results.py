@@ -28,7 +28,7 @@ city = "paris"
 key = "contemp" # Contemporain for french and contemporary for english
 
 enter_city(driver, city)
-# driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
+driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
 
 auction_houses = get_auction_houses(driver)
 total = len(auction_houses)
@@ -47,7 +47,7 @@ for i in range(start, end):
 	auction_house = auction_houses[i]
 	auction_house_name = auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').text.encode('ascii', 'ignore')
 
-	print (auction_house_name)
+	print (auction_house_name, i)
 
 	# open exhibitions for auction house 
 	auction_house.find_element_by_xpath('//*[@id="Container"]/div/table/tbody/tr[2]/td/table/tbody/tr[' + str(i+1) + ']/td[1]/a[1]').click()
@@ -65,7 +65,7 @@ for i in range(start, end):
 
             # re enter city name
             enter_city(driver, city)
-            # driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
+            driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
             continue
 
 	auction_house_data = get_auction_house_data(features, key, driver, city, auction_house_name)
@@ -75,7 +75,7 @@ for i in range(start, end):
 
 	# re enter city name
 	enter_city(driver, city)
-	# driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
+	driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
 
 	with open(dest, "a") as my_file:
 		wr = csv.writer(my_file)
