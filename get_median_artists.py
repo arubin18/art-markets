@@ -1,11 +1,14 @@
 import numpy as np
+import csv
 
 def get_median_artists(city):
 
 	path = "datasets/" +  "-".join(city.split()).lower() + "/data.csv"
-	data = np.array(open(path).readlines())
-
-	labels = data[0].split(",")
+	
+	with open(path) as f:
+		reader = csv.reader(f)
+		data = [row for row in reader]
+	labels = data[0]
 
 	price_index = labels.index("price")
 	artist_index = labels.index("artist")
@@ -14,9 +17,9 @@ def get_median_artists(city):
 	prices = {}
 
 	for line in data[1:]:
-		artist = line.split(",")[artist_index]
-		price = int(line.split(",")[price_index])
-		sold = line.split(",")[sold_index]
+		artist = line[artist_index]
+		price = int(line[price_index])
+		sold = line[sold_index]
 
 		if artist not in prices:
 			prices[artist] = []

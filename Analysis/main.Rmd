@@ -11,6 +11,8 @@ library(magrittr)
 library(dplyr)
 library(feather)
 library(stringr)
+library(forcats)
+library(reticulate)
 
 ```
 
@@ -18,15 +20,13 @@ library(stringr)
 
 ```{r setup, include=FALSE}
 
-MyData <- read.csv(file="~/Art-Markets/Analysis/whole_data.csv", header=TRUE, sep=",")
-
-path <- "dataset.feather"
+MyData <- read.csv(file="~/Art-Markets/datasets/whole_data.csv", header=TRUE, sep=",")
 
 write_feather(MyData, path)
 
 ```
 
-## clean data
+## pre-clean data
 
 ```{r setup, include=FALSE}
 
@@ -34,14 +34,54 @@ path <- "dataset.feather"
 
 MyData <- read_feather(path)
 
-# change data types
+# remove extra level
+MyData %<>%
+  filter(city != "city") %>%
+  filter(!str_detect(auction_date, "2007")) %>% 
+  droplevels()
+
+levels(MyData$city) = c("London", "New York", "Paris")
+
+MyData$artist_volume <- NULL
+MyData$artist_median_price <- NULL
+MyData$artist_lots_sold <- NULL
+MyData$img_url <- NULL
+
+colnames(MyData)[which(names(MyData) == "signed")] <- "dummy_signed"
+colnames(MyData)[which(names(MyData) == "rate_sold_before")] <- "sale_rate_before"
+
+## merge the phillips auctions
+MyData$auction_house[MyData$auction_house == "Phillips de Pury & Co. (see Phillips)"] <- paste("Phillips", MyData$city[MyData$auction_house == "Phillips de Pury & Co. (see Phillips)"], sep=" ")
+
+levels(MyData$auction_house)[levels(MyData$auction_house) == "Christie's London, South Kensington"] = "Christie's London"
+levels(MyData$auction_house)[levels(MyData$auction_house) == "Christie's London, King Street"] = "Christie's London"
+levels(MyData$auction_house)[levels(MyData$auction_house) == "Sotheby's London Benefit Auctions"] = "Sotheby's London"
+levels(MyData$auction_house)[levels(MyData$auction_house) == "Sotheby's London, New Bond Street"] = "Sotheby's London"
+
+levels(droplevels(MyData$auction_house))
+
+```
+
+
+## clean data with restrictions
+# filtering for western art, painting as medium type 
+# observation count is 12,048
+
+```{r setup, include=FALSE}
+
+## change data types
 MyData$year_created = strtoi(MyData$year_created)
 MyData$sold = strtoi(MyData$sold)
-MyData
+MyData$auction_lot = as.numeric(as.character(MyData$auction_lot))
+MyData$area = as.numeric(as.character(MyData$area))
+MyData$price = as.numeric(as.character(MyData$price))
 
-# create categorical variable representing lot position
+# filter for data range 
 MyData %<>%
-  select(-img_url) %>%
+  filter(year_created >= 1950 & year_created < 1980) 
+
+## create categorical variable representing lot position
+MyData %<>%
   mutate(lot_position = case_when(
     .$auction_lot > 0 & .$auction_lot <= 0.25 ~ 1,
     .$auction_lot > 0.25 & .$auction_lot <= 0.5 ~ 2,
@@ -51,38 +91,37 @@ MyData %<>%
 
 MyData$lot_position <- as.factor(MyData$lot_position)
 
-# merge the phillips auctions
-MyData$auction_house[MyData$auction_house == "Phillips de Pury & Co. (see Phillips)"] <- paste("Phillips", MyData$city[MyData$auction_house == "Phillips de Pury & Co. (see Phillips)"], sep=" ")
-
 ## create categorical variable for auction house caliber
 # get auction house rankings
 house_rankings <- MyData %>%
   group_by(city, auction_house) %>%
-  summarise(n = n()) %>%
-  arrange(desc(n)) %>%
-  mutate(ranking = row_number()) %>%
-  select(-n)
+  summarise(house_volume = n()) %>%
+  arrange(desc(house_volume)) %>%
+  mutate(ranking = row_number()) 
 
-# get auction house rankings for each observation
+## get auction house rankings for each observation
 MyData <- merge(MyData, house_rankings, by = c("auction_house", "city"))
 
-# assign caliber 
-MyData %<>% 
+## assign caliber
+MyData %<>%
   mutate(caliber = case_when(
     .$ranking <= 2 ~ "Major",
-    .$ranking > 2 & .$ranking <= 5 ~ "Medium",
-    .$ranking > 5 ~ "Small")) %>%
-  select(-ranking)
+    .$ranking > 2 & .$house_volume >= 550 ~ "Medium",
+    .$house_volume < 550 ~ "Small")) %>%
+  select(-c(ranking, house_volume))
 
-# create dummy for has volume 
-# filter for year, artists with volume of works greater than or equal to 10, artwork is signed
+# convert column into factors
+MyData$caliber = factor(MyData$caliber)
 
+# create dummy for has volume
 MyData %<>%
-  mutate(dummy_volume = ifelse(volume > 0, 1, 0)) %>%
-  filter(year_created >= 1950 & year_created < 1980) %>%
-  filter(artist_volume >= 10) %>%
-  filter(signed >= 1) %>%
-  select(-signed)
+  mutate(dummy_volume = ifelse(volume != 0, 1, 0)) 
+
+# filter for area between 50 and 5000 squared inches and artwork is signed
+# MyData %<>%
+#   # filter(area >= 50 & area <= 5000) %>%
+#   filter(dummy_signed == 1) %>%
+#   select(-dummy_signed)
 
 MyData$dummy_volume <- as.factor(MyData$dummy_volume)
 
@@ -90,12 +129,13 @@ MyData$dummy_volume <- as.factor(MyData$dummy_volume)
 # convert mediums to lowercase
 MyData$medium <- tolower(MyData$medium)
 
+# restrict for non volume artworks 
 MyData %<>%
   filter(dummy_volume == 0) %>%
   select(-c(volume, dummy_volume))
 
 is_mixed_media <- function(medium){
-  return (str_detect(medium, "&") | str_detect(medium, "and") | str_detect(medium, "with") 
+  return (str_detect(medium, "&") | str_detect(medium, "and") | str_detect(medium, "with")
           | str_detect(medium, "mixed media"))
 }
 
@@ -116,8 +156,10 @@ MyData %<>%
     is_panting(.$medium) & !is_mixed_media(.$medium) ~ "Painting",
     is_works_on_paper(.$medium) & !is_mixed_media(.$medium) ~ "Works on Paper"))
 
-## filter for non western art 
+# convert column to become factors
+MyData$medium_type = factor(MyData$medium_type)
 
+## filter for non western art
 MyData$exhibition <- tolower(MyData$exhibition)
 
 is_western <- function(exhibition){
@@ -143,29 +185,56 @@ top_type = types[[1]]
 
 MyData %<>%
   filter(medium_type == top_type) %>%
-  select(-medium_type)
+  select(-c(medium_type))
 
-# get rankings of artists with respect to frequency
+## get features on artists 
 artists <- MyData %>%
   group_by(artist) %>%
-  summarise(n = n()) %>%
-  arrange(desc(n))
+  summarise_at(vars(sold, price), funs(mean, n(), sum)) %>%
+  select(artist,sold_mean, sold_n, sold_sum, price_sum) %>%
+  filter(sold_sum >= 10) %>%
+  mutate(price_mean = price_sum / sold_sum) %>%
+  select(-price_sum)
 
-# get rid of extreme values or corrupted values
-# - artworks with no average estimate (not many observations) 
+names(artists) <- c("artist","artist_sale_rate","artist_volume", "artist_num_sold","artist_avg_price")
+
+# get rid of observations from artists not in the artist data frame above 
+MyData %<>%
+  filter(artist %in% artists$artist)
+
+# get artist features for each observation
+MyData <- merge(MyData, artists, by = "artist")
+
+## get rid of extreme values or corrupted values
+# - artworks with no average estimate (not many observations)
 MyData %<>%
   filter(avg_estimate != 0) %>%
   filter(area < 100000)
 
+## change column names
+colnames(MyData)[which(names(MyData) == "sold")] <- "dummy_sold"
+colnames(MyData)[which(names(MyData) == "idd")] <- "ID"
+
+MyData$year_created = factor(MyData$year_created)
+
+## create dummy variable for estimate greater than average sold before 
+MyData %<>%
+  mutate(dummy_estimate_higher = ifelse(avg_price_sold_before < avg_estimate,1,0))
+
+## export artists and load dates
+write.csv(artists$artist, file="artists.csv", row.names = FALSE)
+dates <- read.csv(file="dates.csv", header=TRUE, sep=",")
+
 ```
+
 
 ## get data for artworks that have sold
 
 ```{r setup, include=FALSE}
 
 MyDataSold <- MyData %>%
-  filter(sold == 1) %>%
-  select(-sold)
+  filter(dummy_sold == 1) %>%
+  select(-dummy_sold)
 
 ```
 
@@ -175,6 +244,16 @@ MyDataSold <- MyData %>%
 
 write.csv(MyData, file="cleaned_data.csv")
 
+write.csv(MyDataSold, file="cleaned_sold_data.csv")
+
+
+```
+
+## scrape data on artists
+
+```{r setup, include=FALSE}
+
+py_run_file("scrape_artists.py")
 
 ```
 

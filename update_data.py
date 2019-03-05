@@ -6,17 +6,16 @@ from add_features import *
 
 labels = ["idd", "city", "exhibition", "artist", "title", "price", "sold", "avg_estimate", "signed", "area", \
 				"volume", "year_created", "auction_lot", "auction_house", "auction_date", "rate_sold_before", \
-				"avg_price_sold_before", "num_artworks", "avg_price_sold", "num_artists", "sale_rate", "img_url", \
-				"volatility_before", "volatility", "skew_before", "skew", "medium"]
+				"avg_price_sold_before", "median_price_sold_before", "num_artworks", "avg_price_sold", "median_price_sold",\
+				"num_artists", "sale_rate", "img_url", "volatility_before", "volatility", "skew_before", "skew", 
+				"medium", "lots_per_artist", "num_artworks_ratio"]
 
-city = "London"
+cities = ["New York", "London", "Paris"]
 
-# parse_data(city, labels)
-# update_prices(city)
-# add_features(city)
-
-download_images(city)
-
+for city in cities:
+	print (city)
+	parse_data(city, labels)
+	update_prices(city)
 
 
 

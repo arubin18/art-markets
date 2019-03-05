@@ -8,8 +8,11 @@ def update_prices(city):
 	""" update prices by cpi """
 
 	path = "datasets/" +  "-".join(city.split()).lower() + "/data.csv"
-	data = np.array(open(path).readlines())
-	labels = data[0].split(",")
+
+	with open(path) as f:
+		reader = csv.reader(f)
+		data = [row for row in reader]
+	labels = data[0]
 
 	price_index = labels.index("price")
 	avg_estimate_index = labels.index("avg_estimate")
@@ -28,8 +31,13 @@ def update_prices(city):
 	for i in range(1,length):
 
 		# get past prices
-		sale = data[i].split(",")
-		price_past = float(sale[price_index])
+		sale = data[i]
+		try:
+			price_past = float(sale[price_index])
+		except:
+			print (sale)
+			continue
+			
 		avg_estimate_past = float(sale[avg_estimate_index])
 		avg_price_sold_before_past = float(sale[avg_price_sold_before_index])
 		avg_price_sold_past = float(sale[avg_price_sold_index])

@@ -10,8 +10,12 @@ def add_features(city):
 	rates_sold = get_lots_sold_artists(city)
 
 	path = "datasets/" +  "-".join(city.split()).lower() + "/data.csv"
-	data = np.array(open(path).readlines())
-	labels = data[0].split(",")
+
+	with open(path) as f:
+		reader = csv.reader(f)
+		data = [row for row in reader]
+	labels = data[0]
+
 	labels[-1] = labels[-1].strip("\n").strip("\r")
 	new_labels = ["artist_median_price", "artist_volume", "artist_lots_sold"]
 	labels += new_labels
@@ -27,7 +31,7 @@ def add_features(city):
 
 	for i in range(1,length):
 
-		sale = data[i].split(",")
+		sale = data[i]
 		sale[-1] = sale[-1].strip("\n").strip("\r")
 		artist = sale[artist_index]
 
