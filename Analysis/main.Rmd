@@ -253,6 +253,7 @@ write.csv(MyDataSold, file="cleaned_sold_data.csv")
 
 ```{r setup, include=FALSE}
 
+write.csv(artists$artist, file="artists.csv", row.names = FALSE)
 py_run_file("scrape_artists.py")
 
 ```
