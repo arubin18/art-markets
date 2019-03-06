@@ -185,7 +185,7 @@ top_type = types[[1]]
 
 MyData %<>%
   filter(medium_type == top_type) %>%
-  select(-c(medium_type))
+  select(-medium_type)
 
 ## get features on artists 
 artists <- MyData %>%
