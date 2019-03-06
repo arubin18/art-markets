@@ -1,4 +1,41 @@
 artist,birth_year,death_year
+A R Ralf Winkler Penck,1939,2017
+Ad Reinhardt,1913,1967
+Adolph Gottlieb,1903,1974
+Agnes Bernice Martin,1912,2004
+Agostino Bonalumi,1935,2013
+Al Held,1928,2005
+Alain Jacquet,1939,2008
+Alan Davie,1920,2014
+Albert Bitran,1931,
+Alex Katz,1927,
+Alexander Sandy Calder,1898,1976
+Alexandre Alecos Fassianos,1935,
+Alexandre Istrati,1915,1991
+Alexandre Sacha Garbell,1903,1970
+Alfred Jensen,1903,1981
+Alfred Manessier,1911,1993
+Alice Neel,1900,1984
+Allan D'Arcangelo,1930,1998
+Andre Bauchant,1873,1958
+Andre Beaudin,1895,1979
+Andre Cottavoz,1922,2012
+Andre Lanskoy,1902,1976
+Andre Marfaing,1925,1987
+Andre Masson,1896,1987
+Andree Pollier,1916,2009
+Andy Warhol,1928,1987
+Anne Dean Truitt,1921,2004
+Anselm Kiefer,1945,
+Antal Biro,1907,1990
+Antoni Clave Sanmartin,1913,2005
+Antoni Tapies,1923,2012
+Antonio Recalcati,1938,
+Antonio Saura,1930,1998
+Antonio Segui,1934,
+Aristide Caillaud,1902,1990
+Armand Pierre Arman,1928,2005
+Arpad Szenes,1897,1985
 Asger Jorn,1914,1973
 Atila,1931,1987
 Avigdor Arikha,1929,2010
@@ -9,248 +46,248 @@ Bengt Lindstrom,1925,2008
 Bernard Buffet,1928,1999
 Bernard Dufour,1922,2016
 Bernard Piga,1934,
-Bernard Quentin,,
-Bernard Rancillac,,
-Bernard Requichot,,
-Brice Marden,,
-Camille Bryen,,
-Chafik Abboud,,
-Charles Hossein Zenderoudi,,
-Charles Lapicque,,
-Charles Marcon,,
-Claude Bellegarde,,
-Claude Georges,,
-Claude Viallat,,
-Conrad Marca-Relli,,
-Constantin Georges Macris,,
-Dan Christensen,,
-David Hockney,,
+Bernard Quentin,1923,
+Bernard Rancillac,1931,
+Bernard Requichot,1929,1961
+Brice Marden,1938,
+Camille Bryen,1907,1977
+Chafik Abboud,1926,2004
+Charles Hossein Zenderoudi,1937,
+Charles Lapicque,1898,1988
+Charles Marcon,1920,
+Claude Bellegarde,1927,
+Claude Georges,1929,1988
+Claude Viallat,1936,
+Conrad Marca-Relli,1913,2000
+Constantin Georges Macris,1917,1984
+Dan Christensen,1942,2007
+David Hockney,1937,
 David Lan-Bar,,
-Denise Dobin,,
-Dikran Daderian,,
-Djoka Ivackovic,,
-Ed Ruscha,,
-Edouard Pignon,,
-Edouardo Arroyo,,
-Eduardo Jonquieres,,
-Ellsworth Kelly,,
-Elvire Jan Kouyoumjian,,
-Emilio Grau-Sala,,
-Enrico Castellani,,
-Ernst Wilhelm Nay,,
-Eugne Leroy,,
-Ezekiel Baroukh,,
-Fateh Moudarres,,
-Felix Labisse,,
-Ferit Iscan,,
-Fernando Botero,,
+Denise Dobin,1916,2010
+Dikran Daderian,1929,
+Djoka Ivackovic,1930,
+Ed Ruscha,1937,
+Edouard Pignon,1905,1993
+Edouardo Arroyo,1937,
+Eduardo Jonquieres,1918,2000
+Ellsworth Kelly,1923,2015
+Elvire Jan Kouyoumjian,1904,1996
+Emilio Grau-Sala,1911,1975
+Enrico Castellani,1930,
+Ernst Wilhelm Nay,1902,1968
+Eugne Leroy,1910,2000
+Ezekiel Baroukh,1909,1984
+Fateh Moudarres,1922,1999
+Felix Labisse,1905,1982
+Ferit Iscan,1931,1986
+Fernando Botero,1932,
 Francis Bacon,,
-Francisco Lopez,,
-Francois Arnal,,
-Francois Charles Alexis Albert Morellet,,
-Frank Helmut Auerbach,,
-Frank Stella,,
-Franz Josef Kline,,
-Frederic Benrath,,
-Friedel Dzubas,,
-Gaston Chaissac,,
-Gene Davis,,
-Genevieve Asse,,
-Genevieve Claisse,,
-Georg Kern Baselitz,,
-Georges Anatolievich Pogedaieff,,
-Georges Mathieu,,
-Gerard Ernest Schneider,,
-Gerard Guyomard,,
-Gerard Schlosser,,
-Gerardo Chavez Lopez,,
-Gerhard Richter,,
-Gianni Bertini,,
-Gilles Aillaud,,
-Gudmundur Erro,,
-Guillaume Corneille,,
-Gustave Singier,,
-Hajime Kato,,
-Hans Hartung,,
-Hans Hofmann,,
-Heinz Mack,,
-Helen Frankenthaler,,
-Henri Bernard Goetz,,
-Henri Hayden,,
-Henri Michaux,,
-Herve Telemaque,,
-Hisao Domoto,,
-Horia Damian,,
-Huguette Arthur Bertrand,,
-Ilya Bolotowsky,,
-Ivan Messac,,
-Jack Hamilton Bush,,
-Jack Tworkov,,
-Jacques Doucet,,
-Jacques Germain,,
-Jacques Monory,,
-Jacques Van Den Bussche,,
-James Brooks,,
-James Guitet,,
-James Pichette,,
-James Rosenquist,,
-Jan Lebenstein,,
-Jan Meijer,,
-Jannis Kounellis,,
-Jaroslav Serpan,,
-Javier Vilato,,
-Jean Bertholle,,
-Jean Chevolleau,,
-Jean Cortot,,
-Jean Degottex,,
-Jean Dubuffet,,
-Jean Fautrier,,
-Jean Helion,,
-Jean Leppien,,
-Jean Lombard,,
-Jean Messagier,,
-Jean Michel Atlan,,
-Jean Miotte,,
-Jean Raine,,
-Jean Rustin,,
-Jean-Marie Calmettes,,
-Jean-Paul Riopelle,,
-Jean-Pierre Pincemin,,
-Jean-Pierre Yvaral,,
-Jeanne Coppel,,
-Jo Delahaut,,
-Joan Mitchell,,
-John Christoforou,,
-John Koenig,,
-John Levee,,
-John McLaughlin,,
-John Wesley,,
-Josef Albers,,
-Josef Sima,,
-Judit Reigl,,
-Jules Olitski,,
-Jules Perahim,,
-Julian Stanczak,,
+Francisco Lopez,1898,1972
+Francois Arnal,1924,2012
+Francois Charles Alexis Albert Morellet,1926,2016
+Frank Helmut Auerbach,1931,
+Frank Stella,1936,
+Franz Josef Kline,1910,1962
+Frederic Benrath,1930,2007
+Friedel Dzubas,1915,1994
+Gaston Chaissac,1910,1964
+Gene Davis,1920,1985
+Genevieve Asse,1923,
+Genevieve Claisse,1935,
+Georg Kern Baselitz,1938,
+Georges Anatolievich Pogedaieff,1897,1971
+Georges Mathieu,1921,2012
+Gerard Ernest Schneider,1896,1986
+Gerard Guyomard,1936,
+Gerard Schlosser,1931,
+Gerardo Chavez Lopez,1937,
+Gerhard Richter,1932,
+Gianni Bertini,1922,2010
+Gilles Aillaud,1928,2005
+Gudmundur Erro,1932,
+Guillaume Corneille,1922,2010
+Gustave Singier,1909,1984
+Hajime Kato,1925,2000
+Hans Hartung,1904,1989
+Hans Hofmann,1880,1966
+Heinz Mack,1931,
+Helen Frankenthaler,1928,2011
+Henri Bernard Goetz,1909,1989
+Henri Hayden,1883,1970
+Henri Michaux,1899,1984
+Herve Telemaque,1937,
+Hisao Domoto,1928,2013
+Horia Damian,1922,2012
+Huguette Arthur Bertrand,1922,2005
+Ilya Bolotowsky,1907,1981
+Ivan Messac,1948,
+Jack Hamilton Bush,1909,1977
+Jack Tworkov,1900,1982
+Jacques Doucet,1924,1994
+Jacques Germain,1915,2001
+Jacques Monory,1924,
+Jacques Van Den Bussche,1925,
+James Brooks,1906,1992
+James Guitet,1925,2010
+James Pichette,1920,1996
+James Rosenquist,1933,2017
+Jan Lebenstein,1930,1999
+Jan Meijer,1927,1995
+Jannis Kounellis,1936,2017
+Jaroslav Serpan,1922,1976
+Javier Vilato,1921,2000
+Jean Bertholle,1909,1996
+Jean Chevolleau,1924,1996
+Jean Cortot,1925,
+Jean Degottex,1918,1988
+Jean Dubuffet,1901,1985
+Jean Fautrier,1898,1964
+Jean Helion,1904,1987
+Jean Leppien,1910,1991
+Jean Lombard,1895,1983
+Jean Messagier,1920,1999
+Jean Michel Atlan,1913,1960
+Jean Miotte,1926,2016
+Jean Raine,1927,1986
+Jean Rustin,1928,2013
+Jean-Marie Calmettes,1918,2007
+Jean-Paul Riopelle,1923,2002
+Jean-Pierre Pincemin,1944,2005
+Jean-Pierre Yvaral,1934,2002
+Jeanne Coppel,1896,1971
+Jo Delahaut,1911,1992
+Joan Mitchell,1925,1992
+John Christoforou,1921,2014
+John Koenig,1924,2008
+John Levee,1924,2017
+John McLaughlin,1898,1976
+John Wesley,1928,
+Josef Albers,1888,1976
+Josef Sima,1891,1971
+Judit Reigl,1923,
+Jules Olitski,1922,2007
+Jules Perahim,1914,2008
+Julian Stanczak,1928,2017
 Julio Le Parc,,
-Jun Dobashi,,
-Karel Christiaan Appel,,
-Kazuo Shiraga,,
-Kei Key Hiraga,,
-Kenneth Noland,,
-Kenzo Okada,,
-Kumi Sugai,,
-Ladislas Kijno,,
-Larry Poons,,
-Larry Rivers,,
-Leon Ferrari,,
-Leon Golub,,
-Leon Zack,,
-LeRoy Neiman,,
-Ljubomir Ljuba Popovic,,
-Louis Cane,,
-Lowell Nesbitt,,
-Lucio Fontana,,
-Ludwig Sander,,
-Luigi Boille,,
-Luis Feito Lpez,,
-Manoucher Yektai,,
-Manuel Cargaleiro,,
-Marc Devade,,
-Marc Janson,,
-Marcel Mouly,,
-Marcel Pouget,,
-Marcelle Loubchansky,,
-Maria Helena Vieira Da Silva,,
-Mariano Carrera,,
-Mario Prassinos,,
-Mark Rothko,,
-Mark Tobey,,
-Martin Barre,,
-Martin Bradley,,
-Maurice Esteve,,
-Max Papart,,
-Michael Goldberg,,
-Michel Macreau,,
-Michel Seuphor,,
-Milton Resnick,,
-Miodrag Djuric Dado,,
-Morris Louis,,
-Nasser Assar,,
-Natalia Dumitresco,,
-Naum Zeitlin,,
-Nejad Melih Devrim,,
-Nicolas De Stael,,
-Norman Bluhm,,
-Olivier Debre,,
-Olivier Mosset,,
-Orhon Mubin,,
-Oscar Gauthier,,
-Pablo Picasso,,
-Paul Jenkins,,
-Paul Kallos,,
-Paul Rebeyrolle,,
-Paul S Foujino,,
-Peter Klasen,,
-Peter Saul,,
-Philip Guston,,
-Philip Pearlstein,,
-Philippe Hosiasson,,
-Piero Dorazio,,
-Pierre Alechinsky,,
-Pierre Dmitrienko,,
-Pierre Lagage,,
-Pierre Soulages,,
-Pierre Tal-Coat,,
-Pinchas Burnstein Maryan,,
-Raymond Abner,,
-Raymond Moisset,,
-Raymond Parker,,
-Ren Duvillier,,
-Ren Laubies,,
-Richard Anuszkiewicz,,
-Richard Artschwager,,
-Richard Diebenkorn,,
-Richard Lindner,,
-Richard Pettibone,,
-Richard Pousette-Dart,,
-Robert Burns Motherwell,,
-Robert E Clark Indiana,,
-Robert Malaval,,
-Robert Natkin,,
-Robert Ryman,,
-Roberto Matta,,
-Roger Bissiere,,
-Roger Edgar Gillet,,
-Roman Opalka,,
-Roy Lichtenstein,,
-Sakti Burman,,
-Sam Gilliam Jr,,
-Sam Lewis Francis,,
-Sam Szafran,,
-Serge Charchoune,,
-Serge Poliakoff,,
-Simon Hantai,,
-Sol LeWitt,,
-Suzanne Roger,,
-Syed Haider Raza,,
-Teh-Chun Chu,,
-Thanos Tsingos,,
-Theodoros Stamos,,
-Thomas Downing,,
-Tom Wesselmann,,
-Toshimitsu Imai,,
-Turan Selim,,
-Turi Simeti,,
-Valerio Adami,,
-Victor Laks,,
-Victor Vasarely,,
-Vladimir Velickovic,,
-Wayne Thiebaud,,
-Wifredo Oscar de la Concepcion Lam,,
-Willem de Kooning,,
-William Nelson Copley,,
-Wojcieck Voy Fangor,,
-Wou-Ki Zao,,
-Yannis Gaitis,,
-Yayoi Kusama,,
-Zoran Antonio Music,,
+Jun Dobashi,1910,1975
+Karel Christiaan Appel,1921,2006
+Kazuo Shiraga,1924,2008
+Kei Key Hiraga,1936,2000
+Kenneth Noland,1924,2010
+Kenzo Okada,1902,1982
+Kumi Sugai,1919,1996
+Ladislas Kijno,1921,2012
+Larry Poons,1937,
+Larry Rivers,1923,2002
+Leon Ferrari,1920,2013
+Leon Golub,1922,2004
+Leon Zack,1892,1980
+LeRoy Neiman,1921,2012
+Ljubomir Ljuba Popovic,1934,2016
+Louis Cane,1943,
+Lowell Nesbitt,1933,1993
+Lucio Fontana,1899,1968
+Ludwig Sander,1906,1975
+Luigi Boille,1926,2015
+Luis Feito Lpez,1929,
+Manoucher Yektai,1922,
+Manuel Cargaleiro,1927,
+Marc Devade,1943,1983
+Marc Janson,1930,
+Marcel Mouly,1918,2008
+Marcel Pouget,1923,1985
+Marcelle Loubchansky,1917,1988
+Maria Helena Vieira Da Silva,1908,1992
+Mariano Carrera,1934,
+Mario Prassinos,1916,1985
+Mark Rothko,1903,1970
+Mark Tobey,1890,1976
+Martin Barre,1924,1993
+Martin Bradley,1931,
+Maurice Esteve,1904,2001
+Max Papart,1911,1994
+Michael Goldberg,1924,2007
+Michel Macreau,1935,1995
+Michel Seuphor,1901,1999
+Milton Resnick,1917,2004
+Miodrag Djuric Dado,1933,2010
+Morris Louis,1912,1962
+Nasser Assar,1928,2011
+Natalia Dumitresco,1915,1997
+Naum Zeitlin,1909,1997
+Nejad Melih Devrim,1923,1995
+Nicolas De Stael,c.1575,1622
+Norman Bluhm,1921,1999
+Olivier Debre,1920,1999
+Olivier Mosset,1944,
+Orhon Mubin,1924,1981
+Oscar Gauthier,1921,2009
+Pablo Picasso,1881,1973
+Paul Jenkins,1923,2012
+Paul Kallos,1928,2001
+Paul Rebeyrolle,1926,2005
+Paul S Foujino,1925,
+Peter Klasen,1935,
+Peter Saul,1934,
+Philip Guston,1913,1980
+Philip Pearlstein,1924,
+Philippe Hosiasson,1898,1978
+Piero Dorazio,1927,2005
+Pierre Alechinsky,1927,
+Pierre Dmitrienko,1925,1974
+Pierre Lagage,1911,1977
+Pierre Soulages,1919,
+Pierre Tal-Coat,1905,1985
+Pinchas Burnstein Maryan,1927,1977
+Raymond Abner,1924,1999
+Raymond Moisset,1906,1995
+Raymond Parker,1922,1990
+Ren Duvillier,1919,2002
+Ren Laubies,1924,2006
+Richard Anuszkiewicz,1930,
+Richard Artschwager,1923,2013
+Richard Diebenkorn,1922,1993
+Richard Lindner,1901,1978
+Richard Pettibone,1938,
+Richard Pousette-Dart,1916,1992
+Robert Burns Motherwell,1915,1991
+Robert E Clark Indiana,1928,2018
+Robert Malaval,1937,1980
+Robert Natkin,1930,2010
+Robert Ryman,1930,2019
+Roberto Matta,1911,2002
+Roger Bissiere,1886,1964
+Roger Edgar Gillet,1924,2004
+Roman Opalka,1931,2011
+Roy Lichtenstein,1923,1997
+Sakti Burman,1935,
+Sam Gilliam Jr,1933,
+Sam Lewis Francis,1923,1994
+Sam Szafran,1930,
+Serge Charchoune,1888,1975
+Serge Poliakoff,1900/1906,1969
+Simon Hantai,1922,2008
+Sol LeWitt,1928,2007
+Suzanne Roger,1899,1986
+Syed Haider Raza,1922,2016
+Teh-Chun Chu,1920,2014
+Thanos Tsingos,1914,1965
+Theodoros Stamos,1922,1997
+Thomas Downing,1928,1985
+Tom Wesselmann,1931,2004
+Toshimitsu Imai,1928,2002
+Turan Selim,1915,1994
+Turi Simeti,1929,
+Valerio Adami,1935,
+Victor Laks,1924,2011
+Victor Vasarely,1906,1997
+Vladimir Velickovic,1935,
+Wayne Thiebaud,1920,
+Wifredo Oscar de la Concepcion Lam,1902,1982
+Willem de Kooning,1904,1997
+William Nelson Copley,1919,1996
+Wojcieck Voy Fangor,1922,2015
+Wou-Ki Zao,1921,2013
+Yannis Gaitis,1923,1984
+Yayoi Kusama,1929,2011
+Zoran Antonio Music,1909,2005
