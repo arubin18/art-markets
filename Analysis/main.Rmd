@@ -9,6 +9,7 @@ output: html_document
 
 library(magrittr)
 library(dplyr)
+library(tidyr)
 library(feather)
 library(stringr)
 library(forcats)
@@ -22,6 +23,7 @@ library(reticulate)
 
 MyData <- read.csv(file="~/Art-Markets/datasets/whole_data.csv", header=TRUE, sep=",")
 
+path <- "dataset.feather"
 write_feather(MyData, path)
 
 ```
@@ -31,7 +33,6 @@ write_feather(MyData, path)
 ```{r setup, include=FALSE}
 
 path <- "dataset.feather"
-
 MyData <- read_feather(path)
 
 # remove extra level
@@ -60,6 +61,12 @@ levels(MyData$auction_house)[levels(MyData$auction_house) == "Sotheby's London, 
 
 levels(droplevels(MyData$auction_house))
 
+## change column names
+colnames(MyData)[which(names(MyData) == "sold")] <- "dummy_sold"
+colnames(MyData)[which(names(MyData) == "idd")] <- "ID"
+
+write_feather(MyData, path)
+
 ```
 
 
@@ -69,9 +76,13 @@ levels(droplevels(MyData$auction_house))
 
 ```{r setup, include=FALSE}
 
+path <- "dataset.feather"
+
+MyData <- read_feather(path)
+
 ## change data types
 MyData$year_created = strtoi(MyData$year_created)
-MyData$sold = strtoi(MyData$sold)
+MyData$dummy_sold = strtoi(MyData$dummy_sold)
 MyData$auction_lot = as.numeric(as.character(MyData$auction_lot))
 MyData$area = as.numeric(as.character(MyData$area))
 MyData$price = as.numeric(as.character(MyData$price))
@@ -190,10 +201,10 @@ MyData %<>%
 ## get features on artists 
 artists <- MyData %>%
   group_by(artist) %>%
-  summarise_at(vars(sold, price), funs(mean, n(), sum)) %>%
-  select(artist,sold_mean, sold_n, sold_sum, price_sum) %>%
-  filter(sold_sum >= 10) %>%
-  mutate(price_mean = price_sum / sold_sum) %>%
+  summarise_at(vars(dummy_sold, price), funs(mean, n(), sum)) %>%
+  select(artist,dummy_sold_mean, dummy_sold_n, dummy_sold_sum, price_sum) %>%
+  filter(dummy_sold_sum >= 10) %>%
+  mutate(price_mean = price_sum / dummy_sold_sum) %>%
   select(-price_sum)
 
 names(artists) <- c("artist","artist_sale_rate","artist_volume", "artist_num_sold","artist_avg_price")
@@ -211,22 +222,45 @@ MyData %<>%
   filter(avg_estimate != 0) %>%
   filter(area < 100000)
 
-## change column names
-colnames(MyData)[which(names(MyData) == "sold")] <- "dummy_sold"
-colnames(MyData)[which(names(MyData) == "idd")] <- "ID"
-
 MyData$year_created = factor(MyData$year_created)
 
 ## create dummy variable for estimate greater than average sold before 
 MyData %<>%
   mutate(dummy_estimate_higher = ifelse(avg_price_sold_before < avg_estimate,1,0))
 
-## export artists and load dates
+## export artists
 write.csv(artists$artist, file="artists.csv", row.names = FALSE)
-dates <- read.csv(file="dates.csv", header=TRUE, sep=",")
+
+## seperate auction date
+MyData %<>%
+  separate(auction_date, c("auction_month", "auction_day", "auction_year")) %>%
+  select(-c(auction_month, auction_day))
+
+MyData$auction_year = as.numeric(MyData$auction_year)
+
+summarise_at(vars(dummy_sold, price), funs(mean, n(), sum)) %>%
+
+## get artist median price by year
+artist_prices <- MyData %>%
+  group_by(artist, auction_year) %>%
+  filter(dummy_sold == 1) %>%
+  summarise_at(artist_median_price_before = median(price)) %>%
+  # increase year by one for each median price 
+  mutate(auction_year = auction_year + 1) %>%
+  filter(auction_year != 2019)
+
+# get artist median price from year before
+# in process, removes observations from 2009
+MyData = merge(MyData, artist_prices, by = c("artist", "auction_year")) 
+
+artist_rates <- MyData %>%
+  group_by(artist, auction_year) %>%
+  summarise_at(artist_rate_before = mean(dummy_sold)) %>%
+  # increase year by one for each median price 
+  mutate(auction_year = auction_year + 1) %>%
+  filter(auction_year != 2019)
 
 ```
-
 
 ## get data for artworks that have sold
 
@@ -243,19 +277,6 @@ MyDataSold <- MyData %>%
 ```{r setup, include=FALSE}
 
 write.csv(MyData, file="cleaned_data.csv")
-
 write.csv(MyDataSold, file="cleaned_sold_data.csv")
 
-
 ```
-
-## scrape data on artists
-
-```{r setup, include=FALSE}
-
-write.csv(artists$artist, file="artists.csv", row.names = FALSE)
-py_run_file("scrape_artists.py")
-
-```
-
-
