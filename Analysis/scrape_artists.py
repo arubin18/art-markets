@@ -19,7 +19,8 @@ def transform_name(name):
 
 names = map(lambda x: transform_name(x), artists)
 
-driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
+#driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
+driver = webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver") 
 driver.get("http://www.askart.com/")
 
 data = []
