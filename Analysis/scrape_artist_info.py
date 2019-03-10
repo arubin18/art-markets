@@ -24,8 +24,8 @@ span = 10
 labels = [str(year) for year in range(2009-span,2019)]
 start_date = labels[0]
 
-#driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
-driver = webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver")
+driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
+# driver = webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver")
 driver.get("http://www.askart.com/")
 
 references = {}
@@ -61,6 +61,7 @@ for name in names:
 			auto_complete_field[1].find_element_by_tag_name("a").click()
 
 		# get date range
+		time.sleep(0.5)
 		dates = driver.find_element_by_xpath('//*[@id="MainPageContent_ArtistTOCmain_fvArtistTOCmain"]/tbody/tr/td/div/span').text.encode('ascii', 'ignore')
 		dates = dates.strip(" ").strip("(").strip(")") # get rid of extra white space and parentheses
 
@@ -75,6 +76,7 @@ for name in names:
 			death_year = death_year.strip(" ")
 
 	except:
+		print ("hi")
 		pass
 
 

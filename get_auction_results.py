@@ -10,7 +10,8 @@ caps = DesiredCapabilities().CHROME
 caps["pageLoadStrategy"] = "normal"  # complete
 
 ### logging into MFA 
-driver = webdriver.Chrome(desired_capabilities=caps, executable_path="/usr/lib/chromium-browser/chromedriver")
+# driver = webdriver.Chrome(desired_capabilities=caps, executable_path="/usr/lib/chromium-browser/chromedriver")
+driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
 driver.get("http://www.askart.com/")
 
 ### go to directory of auction houses
@@ -37,9 +38,9 @@ start = 0
 end = total
 
 dest = "datasets/" +  "-".join(city.split()).lower() + "/" + "temp" + ".csv" # file destination
-with open(dest, "wb") as my_file:
-	wr = csv.writer(my_file)
-	wr.writerows([labels])
+# with open(dest, "wb") as my_file:
+# 	wr = csv.writer(my_file)
+# 	wr.writerows([labels])
 
 for i in range(start, end):
 
@@ -77,9 +78,9 @@ for i in range(start, end):
 	enter_city(driver, city)
 	driver.find_element_by_xpath('//*[@id="paginator_top"]/a[4]').click()
 
-	with open(dest, "a") as my_file:
-		wr = csv.writer(my_file)
-		wr.writerows(auction_house_data)
+	# with open(dest, "a") as my_file:
+	# 	wr = csv.writer(my_file)
+	# 	wr.writerows(auction_house_data)
 
 
 

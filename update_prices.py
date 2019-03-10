@@ -1,7 +1,13 @@
 from get_cpi import *
+import numpy as np
 import csv
 
-def update_cpi(price_past, cpi_current, cpi_past):
+def update_cpi(price_past, cpi_current, cpi_past, log_transform=False):
+
+	# price has a log transformation applied to it 
+	if log_transform:
+		return int(price_past + np.log(cpi_current) - np.log(cpi_past))
+
 	return int(price_past * (cpi_current / cpi_past))
 
 def update_prices(city):
@@ -16,8 +22,8 @@ def update_prices(city):
 
 	price_index = labels.index("price")
 	avg_estimate_index = labels.index("avg_estimate")
-	avg_price_sold_before_index = labels.index("avg_price_sold_before")
-	avg_price_sold_index = labels.index("avg_price_sold")
+	avg_price_sold_before_index = labels.index("avg_log_price_sold_before")
+	median_price_sold_before_index = labels.index("median_price_sold_before")
 	auction_date_index = labels.index("auction_date")
 
 	cpi_by_year = get_cpi()
@@ -38,9 +44,10 @@ def update_prices(city):
 			print (sale)
 			continue
 			
+		# past prices
 		avg_estimate_past = float(sale[avg_estimate_index])
-		avg_price_sold_before_past = float(sale[avg_price_sold_before_index])
-		avg_price_sold_past = float(sale[avg_price_sold_index])
+		avg_price_sold_before_past = float(sale[avg_price_sold_before_index]) # average of log prices
+		median_price_sold_before_past = float(sale[median_price_sold_before_index])
 
 		# get year and month
 		auction_date = sale[auction_date_index][:]
@@ -53,14 +60,14 @@ def update_prices(city):
 		# get current prices
 		price_current = update_cpi(price_past, cpi_current, cpi_past)
 		avg_estimate_current = update_cpi(avg_estimate_past, cpi_current, cpi_past)
-		avg_price_sold_before_current = update_cpi(avg_price_sold_before_past, cpi_current, cpi_past)
-		avg_price_sold_current = update_cpi(avg_price_sold_past, cpi_current, cpi_past)
+		avg_price_sold_before_current = update_cpi(avg_price_sold_before_past, cpi_current, cpi_past, log_transform=True)
+		median_price_sold_before_current = update_cpi(median_price_sold_before_past, cpi_current, cpi_past)
 
 		# update list with current prices
 		sale[price_index] = int(price_current)
 		sale[avg_estimate_index] = int(avg_estimate_current)
 		sale[avg_price_sold_before_index] = int(avg_price_sold_before_current)
-		sale[avg_price_sold_index] = int(avg_price_sold_current)
+		sale[median_price_sold_before_index] = int(median_price_sold_before_current)
 
 		sale[-1] = sale[-1].strip("\n").strip("\r")
 		new_data.append(sale)

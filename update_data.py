@@ -5,9 +5,9 @@ from update_prices import *
 from add_features import *
 
 labels = ["idd", "city", "exhibition", "artist", "title", "price", "sold", "avg_estimate", "signed", "area", \
-				"volume", "year_created", "auction_lot", "auction_house", "auction_date", "rate_sold_before", \
-				"avg_price_sold_before", "median_price_sold_before", "num_artworks", "avg_price_sold", "median_price_sold",\
-				"num_artists", "sale_rate", "img_url", "volatility_before", "volatility", "skew_before", "skew", 
+				"volume", "year_created", "auction_lot", "auction_house", "auction_date", \
+				"avg_log_price_sold_before", "median_price_sold_before", "num_artworks", \
+				"num_artists", "sale_rate_before", "img_url", "volatility_returns_before", "mean_returns_before", "skew_prices_before", 
 				"medium", "lots_per_artist", "num_artworks_ratio"]
 
 cities = ["New York", "London", "Paris"]

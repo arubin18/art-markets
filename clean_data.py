@@ -10,25 +10,24 @@ def clean_data(data, labels):
 	auctions_sold = 0 # counter for number of auctions sold before the current lot
 	auctions_total = 0 # total price of auctions sold before the current lot
 	auctions_average = 0 # average price of auctions sold before the current lot
-	auctions_median = 0
+	auctions_median = 0 # mean price of auction sold before the current lot 
 	artwork_count = 1 # lots explored in the auction so far
-	largest_lot = 1
-	artist_counter = {}
-	vol = 0 # volatility 
-	total_vol = 0
-	skew = 0
-	total_skew = 0
-	num_artworks = 0
-	num_artists = 0
-	sale_rate = 0
-	avg_price_sold = 0
-	median_price_sold = 0
+	largest_lot = 1 # will be used to record the largest lot recorded at auction 
+	artist_counter = {} # dictionary measuring the number of appearances for each artist 
+	vol_returns = 0 # volatility = standard deviation of log returns
+	mean_returns = 0 # mean of log returns 
+	skew = 0 # skew of prices
+	num_artworks = 0 # number of artworks by artist 
+	num_artists = 0 # number of artists in auction 
+	sale_rate = 0 # sale rate before the current lot in auction 
 	lots_per_artist = 0
 	num_artworks_ratio = 0
 	
 	### iterate through each artwork
 	exhibition_data = []
 
+	log_returns = [] # log returns based on average estimate 
+	log_prices = [] # log transformation of prices 
 	prices = [] # prices for artworks in exhbitiion
 
 	for row in data:
@@ -59,6 +58,8 @@ def clean_data(data, labels):
 		if artist not in artist_counter:
 			artist_counter[artist] = 0
 		artist_counter[artist] += 1
+
+		## clean prices 
 
 		# remove dollar signs
 		if "$" in price:
@@ -101,11 +102,13 @@ def clean_data(data, labels):
 		else:
 			sold = 1
 
+		# clean average estimate
+
 		if len(low_estimate) == 0 or len(high_estimate) == 0:
 			continue
 
 		if not low_estimate[0].isdigit() and not high_estimate[0].isdigit():
-			avg_estimate = 0.0
+			continue
 
 		elif not low_estimate[0].isdigit():
 			avg_estimate = float(high_estimate)
@@ -114,7 +117,13 @@ def clean_data(data, labels):
 			avg_estimate = float(low_estimate)
 
 		else:
-			avg_estimate = float(int(low_estimate) + int(high_estimate)) / 2
+			avg_estimate = (float(low_estimate) + float(high_estimate)) / 2
+
+		# estimated to sell for free or for negative money
+		if avg_estimate <= 0.0:
+			continue
+
+		# clean area and volume 
 
 		if "not" in area:
 			area = "NA"
@@ -191,52 +200,79 @@ def clean_data(data, labels):
 		else:
 			signed = 0
 
-		sold_before = float(auctions_sold) / int(artwork_count)
+		year_created = year_created.strip(".") # get rid of period 
+		year_created = year_created.strip("'") # get rid of final quote
+
+		if "&" in year_created:
+			year_created = year_created.split("&")[0].strip(" ")
+
+		elif " " in year_created:
+			year_created = year_created.split(" ")[-1] # get rid of ca as a prefix 
+
+		elif "." in year_created:
+			year_created = year_created.split(".")[-1] 
+
+		else:
+			pass
+
+		# check if price is numerical
+		try: 
+			price = float(price)
+
+		except:
+			continue
+
+		# sold for free 
+		if sold == 1 and price == 0.0:
+			continue
 
 		artwork_data = [idd, city, exhibition, artist, title, price, sold, avg_estimate, signed, area, \
-			volume, year_created, auction_lot, auction_house, auction_date, sold_before, \
-			auctions_average, auctions_median, num_artworks, avg_price_sold, median_price_sold, num_artists, sale_rate, img_url, \
-			vol, total_vol, skew, total_skew, medium, lots_per_artist, num_artworks_ratio]
+			volume, year_created, auction_lot, auction_house, auction_date, \
+			auctions_average, auctions_median, num_artworks, num_artists, sale_rate, img_url, \
+			vol_returns, mean_returns, skew, medium, lots_per_artist, num_artworks_ratio]
 
-		exhibition_data.append(artwork_data)
+		exhibition_data.append(artwork_data) # append artwork data to exhibition data
 
-		# update sold counter
+		artwork_count += 1 # increment total counter
+
+		# update variables 
 		if sold == 1:
-			auctions_sold += 1
-			try:
-				auctions_total += int(price)
-
-			except:
-				continue
-
-			prices.append(int(price))
-
-			non_zero_prices = filter(lambda p: p != 0, prices)
-
-			# empty 
-			if len(non_zero_prices) == 0:
-				vol = 0
-				skew = 0
-				auctions_median = 0
 			
+			auctions_sold += 1 # increment sold counter 
+
+			sale_rate = float(auctions_sold) / artwork_count # rate of auctions sold before current lot
+
+			# prices and log prices
+			prices.append(price)
+			log_prices.append(np.log(price))
+
+			# returns on average estimate 
+			sale_return = float(price - avg_estimate) / avg_estimate
+
+			# transform return on average estimate
+			if sale_return == 0:
+				log_return = 1
+
 			else:
-				vol = np.std(non_zero_prices) # volatility 
-				skew = scipy.stats.skew(non_zero_prices)
-				auctions_median = np.median(non_zero_prices)
-			
-			auctions_average = float(auctions_total) / auctions_sold
+				sign = sale_return / abs(sale_return)
+				sale_return = abs(sale_return)
+				log_return = sign * np.log(sale_return)
 
-		artwork_count += 1 # update total counter
+			log_returns.append(log_return)
+			
+			# descriptions of log returns 
+			vol_returns = np.std(log_return) # volatility = standard deviation of log returns
+			mean_returns = np.mean(log_returns)
+
+			# descriptions of prices and log prices 
+			skew = scipy.stats.skew(prices) # skew of prices 
+			auctions_average = np.mean(log_prices) # mean of log prices 
+			auctions_median = np.median(prices) # median of prices 
 
 	lot_index = labels.index("auction_lot")
 	num_artworks_index = labels.index("num_artworks")
 	artist_index = labels.index("artist")
-	avg_price_sold_index = labels.index("avg_price_sold")
-	median_price_sold_index = labels.index("median_price_sold")
 	num_artists_index = labels.index("num_artists")
-	sale_rate_index = labels.index("sale_rate")
-	total_vol_index = labels.index("volatility")
-	total_skew_index = labels.index("skew")
 	lots_per_artist_index = labels.index("lots_per_artist")
 	num_artworks_ratio_index = labels.index("num_artworks_ratio")
 
@@ -244,31 +280,23 @@ def clean_data(data, labels):
 
 	num_artists = len(artist_counter.keys())
 
-	sale_rate = float(auctions_sold) / artwork_count
-
-	for i in range(0,len(exhibition_data)):
-
-		exhibition_data[i][total_skew_index] = skew
-
-		exhibition_data[i][total_vol_index] = vol
-
-		exhibition_data[i][sale_rate_index] = sale_rate
+	for i in range(len(exhibition_data)):
 
 		exhibition_data[i][num_artists_index] = num_artists
-		exhibition_data[i][lots_per_artist_index] = float(largest_lot) / num_artists
-
-		exhibition_data[i][avg_price_sold_index] = auctions_average
-		exhibition_data[i][median_price_sold_index] = auctions_median
+		exhibition_data[i][lots_per_artist_index] = float(artwork_count) / num_artists
 
 		lot_num = float(exhibition_data[i][lot_index])
 		exhibition_data[i][lot_index] = lot_num / largest_lot
 
 		artist = exhibition_data[i][artist_index]
 		exhibition_data[i][num_artworks_index] = artist_counter[artist]
-		exhibition_data[i][num_artworks_ratio_index] = float(artist_counter[artist]) / largest_lot
+		exhibition_data[i][num_artworks_ratio_index] = float(artist_counter[artist]) / artwork_count
 
 	# skip line if missing values 
-	exhibition_data = [line for line in exhibition_data if 'NA' not in line] # remove lines with NAs
-
+	# exhibition_data = [line for line in exhibition_data if 'NA' not in line] # remove lines with NAs
 
 	return exhibition_data
+
+
+
+	

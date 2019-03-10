@@ -21,7 +21,8 @@ library(reticulate)
 
 ```{r setup, include=FALSE}
 
-MyData <- read.csv(file="~/Art-Markets/datasets/whole_data.csv", header=TRUE, sep=",")
+# load data and convert column values that are missing into NAs
+MyData <- read.csv(file="~/Art-Markets/datasets/whole_data.csv", header=TRUE, sep=",", na.strings=c("", "NA"))
 
 path <- "dataset.feather"
 write_feather(MyData, path)
@@ -32,8 +33,16 @@ write_feather(MyData, path)
 
 ```{r setup, include=FALSE}
 
-path <- "dataset.feather"
-MyData <- read_feather(path)
+path = "dataset.feather"
+MyData = read_feather(path)
+
+# check how many observations are missing values 
+# - 56k observations are missing at least one value 
+# - most are missing year created
+sapply(MyData,function(x) sum(is.na(x)))
+
+MyData$area[is.na(MyData$area)] = median(MyData$area, na.rm=T)
+MyData = MyData[complete.cases(MyData),] # remove observations that are missing values
 
 # remove extra level
 MyData %<>%
@@ -46,7 +55,7 @@ levels(MyData$city) = c("London", "New York", "Paris")
 MyData$artist_volume <- NULL
 MyData$artist_median_price <- NULL
 MyData$artist_lots_sold <- NULL
-MyData$img_url <- NULL
+# MyData$img_url <- NULL
 
 colnames(MyData)[which(names(MyData) == "signed")] <- "dummy_signed"
 colnames(MyData)[which(names(MyData) == "rate_sold_before")] <- "sale_rate_before"
@@ -71,8 +80,8 @@ write_feather(MyData, path)
 
 
 ## clean data with restrictions
-# filtering for western art, painting as medium type 
-# observation count is 12,048
+# filtering for year created, no volume, western art, painting as medium type, artists that have sold at least 10 contemporary artworks 
+
 
 ```{r setup, include=FALSE}
 
@@ -127,12 +136,6 @@ MyData$caliber = factor(MyData$caliber)
 # create dummy for has volume
 MyData %<>%
   mutate(dummy_volume = ifelse(volume != 0, 1, 0)) 
-
-# filter for area between 50 and 5000 squared inches and artwork is signed
-# MyData %<>%
-#   # filter(area >= 50 & area <= 5000) %>%
-#   filter(dummy_signed == 1) %>%
-#   select(-dummy_signed)
 
 MyData$dummy_volume <- as.factor(MyData$dummy_volume)
 
@@ -219,10 +222,7 @@ MyData <- merge(MyData, artists, by = "artist")
 ## get rid of extreme values or corrupted values
 # - artworks with no average estimate (not many observations)
 MyData %<>%
-  filter(avg_estimate != 0) %>%
-  filter(area < 100000)
-
-MyData$year_created = factor(MyData$year_created)
+  filter(avg_estimate != 0)
 
 ## create dummy variable for estimate greater than average sold before 
 MyData %<>%
@@ -234,31 +234,108 @@ write.csv(artists$artist, file="artists.csv", row.names = FALSE)
 ## seperate auction date
 MyData %<>%
   separate(auction_date, c("auction_month", "auction_day", "auction_year")) %>%
-  select(-c(auction_month, auction_day))
+  select(-auction_day)
 
 MyData$auction_year = as.numeric(MyData$auction_year)
+MyData$auction_month = as.numeric(MyData$auction_month)
 
-summarise_at(vars(dummy_sold, price), funs(mean, n(), sum)) %>%
+## get peak months
+MyData %<>%
+  mutate(dummy_peak_month = case_when(
+    (.$auction_month >= 3 & .$auction_month <= 5) | (.$auction_month >= 9 & .$auction_month <= 11) ~ 1,
+    !(.$auction_month >= 3 & .$auction_month <= 5) & !(.$auction_month >= 9 & .$auction_month <= 11) ~ 0
+  )) %>%
+  select(-auction_month)
 
 ## get artist median price by year
-artist_prices <- MyData %>%
-  group_by(artist, auction_year) %>%
-  filter(dummy_sold == 1) %>%
-  summarise_at(artist_median_price_before = median(price)) %>%
-  # increase year by one for each median price 
-  mutate(auction_year = auction_year + 1) %>%
-  filter(auction_year != 2019)
+# artist_prices <- MyData %>%
+#   group_by(artist, auction_year) %>%
+#   filter(dummy_sold == 1) %>%
+#   summarise(artist_median_price_before = median(price)) %>%
+#   # increase year by one for each median price 
+#   mutate(auction_year = auction_year + 1) %>%
+#   filter(auction_year != 2019)
 
 # get artist median price from year before
 # in process, removes observations from 2009
-MyData = merge(MyData, artist_prices, by = c("artist", "auction_year")) 
+# MyData = merge(MyData, artist_prices, by = c("artist", "auction_year")) 
 
-artist_rates <- MyData %>%
-  group_by(artist, auction_year) %>%
-  summarise_at(artist_rate_before = mean(dummy_sold)) %>%
-  # increase year by one for each median price 
-  mutate(auction_year = auction_year + 1) %>%
-  filter(auction_year != 2019)
+# make skew before a categorical variable
+# - there are no very negative skews
+MyData %<>%
+  mutate(skew_before_type = case_when(
+    .$skew_before < 0 ~ "slightly negative",
+    .$skew_before >= 0 & .$skew_before <= 2.37 ~ "slightly positive",
+    .$skew_before > 2.37 ~ "very positive"
+  ))
+
+# get price increase from year before with respect to average estimate 
+# MyData %<>%
+#   mutate(price_increase_percent = (avg_estimate - artist_median_price_before) / artist_median_price_before)
+
+## spread year created - make it a dummy variable 
+# MyData$value = 1
+# MyData %>%
+#   spread_(key_="year_created",
+#           value_ = "value")
+
+# get log price
+MyData %<>%
+  mutate(log_price = case_when(
+    .$price == 0 ~ 0,
+    .$price > 0 ~ log(.$price)
+  ))
+
+```
+
+## extract data from artists and merge with main dataset
+
+```{r setup, include=FALSE}
+
+## import artist info 
+artist_info <- read.csv(file="artist_info.csv", header=TRUE, sep=",", na.strings=c(""))
+
+# get rid of missing data
+artist_info %<>%
+  filter(!is.na(birth_year))
+
+artist_info$death_year = as.numeric(artist_info$death_year)
+
+# merge artist info with main dataset
+MyData = merge(MyData, artist_info, by = "artist")
+
+# 0 = not dead, 1 = dead
+MyData %<>%
+  mutate(dummy_dead = case_when(
+    is.na(.$death_year) ~ 0,
+    .$auction_year - .$death_year < 0 ~ 0,
+    .$auction_year - .$death_year >= 0 ~ 1
+  )) %>%
+  select(-c(birth_year, death_year))
+
+## get recent publications
+window = 4
+
+MyData$recent_publications = 0
+recent_pub_index = grep("recent_publications", colnames(MyData))
+start_date_index = grep("X1999", colnames(MyData))
+
+for (i in 1:nrow(MyData)) {
+  MyData[i,recent_pub_index] = rowSums(MyData[i,(start_date_index + (MyData$auction_year[i] - 1999 - window)):(start_date_index + (MyData$auction_year[i] - 1999))])
+}
+
+MyData %<>%
+  mutate(dummy_publications = case_when(
+    .$recent_publications > 0 ~ 1,
+    .$recent_publications == 0 ~ 0
+  ))
+
+## get rid of unused columns
+MyData %<>%
+  select(-c(names(MyData)[start_date_index:(start_date_index + (2018-1999))]))
+
+# rename column
+colnames(MyData)[which(names(MyData) == "total")] <- "total_publications"
 
 ```
 

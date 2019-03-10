@@ -12,16 +12,22 @@ def get_lots_sold_artists(city):
 
 	artist_index = labels.index("artist")
 	sold_index = labels.index("sold")
+	auction_year_index = labels.index("auction_year")
 
 	works_sold = {}
+
+	empty = [[] for i in range(2009,2019)]
 
 	for line in data[1:]:
 		artist = line[artist_index]
 		sold = int(line[sold_index])
+		year = int(line[auction_year_index])
+
+		dif = year - 2009
 
 		if artist not in works_sold:
-			works_sold[artist] = []
-		works_sold[artist].append(sold)
+			works_sold[artist] = empty
+		works_sold[artist][dif].append(sold)
 
 	rates_sold = {}
 
