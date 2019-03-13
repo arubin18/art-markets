@@ -24,8 +24,8 @@ span = 10
 labels = [str(year) for year in range(2009-span,2019)]
 start_date = labels[0]
 
-driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
-# driver = webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver")
+# driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
+driver = webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver")
 driver.get("http://www.askart.com/")
 
 references = {}
