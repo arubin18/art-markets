@@ -1,0 +1,260 @@
+---
+title: "regression"
+output: html_document
+---
+
+## load libaries  
+
+```{r setup, include=FALSE}
+
+library(magrittr)
+library(dplyr)
+library(tidyr)
+library(feather)
+library(stringr)
+library(forcats)
+library(ROCR)
+library(corrplot)
+library(reshape2)
+library(DAAG)
+library(caret)
+
+```
+
+## load data and data sold
+
+```{r setup, include=FALSE}
+
+path = "dataset.feather"
+MyData = read_feather(path)
+
+# convert column types 
+MyData$avg_log_price_sold_before = as.numeric(as.character(MyData$avg_log_price_sold_before))
+MyData$lots_per_artist = as.numeric(as.character(MyData$lots_per_artist))
+MyData$skew_before_type = as.factor(MyData$skew_before_type)
+MyData$dummy_publications = as.factor(MyData$dummy_publications)
+MyData$num_artworks = as.numeric(as.character(MyData$num_artworks))
+MyData$num_artists = as.numeric(as.character(MyData$num_artists))
+MyData$sale_rate_before = as.numeric(as.character(MyData$sale_rate_before))
+MyData$dummy_peak_month = as.factor(MyData$dummy_peak_month)
+MyData$dummy_estimate_higher = as.factor(MyData$dummy_estimate_higher)
+MyData$volatility_returns_before = as.numeric(as.character(MyData$volatility_returns_before))
+MyData$mean_returns_before = as.numeric(as.character(MyData$mean_returns_before))
+MyData$num_artworks_ratio = as.numeric(as.character(MyData$num_artworks_ratio))
+MyData$dummy_sotheby_christie = as.factor(MyData$dummy_sotheby_christie)
+MyData$dummy_dead = as.factor(MyData$dummy_dead)
+MyData$decade_created = as.factor(MyData$decade_created)
+
+MyDataSold <- MyData %>%
+  filter(dummy_sold == 1) %>%
+  select(-dummy_sold)
+
+# remove observations with prices less than 1
+MyDataSold = MyDataSold[MyDataSold$price >= 1, ]
+
+## get log price
+MyDataSold %<>%
+  mutate(log_price = log(price))
+
+```
+
+## analyzing correlations
+
+```{r setup, include=FALSE}
+
+# numerical variables 
+MyData.num <- MyData %>% select(avg_estimate, area, auction_lot, avg_log_price_sold_before,
+                                        median_price_sold_before, num_artworks, num_artists, 
+                                        sale_rate_before, volatility_returns_before,
+                                        mean_returns_before, skew_prices_before, lots_per_artist,
+                                        num_artworks_ratio, house_sale_rate, artist_sale_rate,
+                                        artist_avg_log_price, house_sale_rate,
+                                        total_publications, recent_publications, house_avg_log_price,
+                                        exhib_avg_log_price, exhib_sale_rate,)
+
+# numerical variables for artworks that have sold
+MyDataSold.num <- MyData.num[MyData$dummy_sold == 1,]
+
+M <- cor(MyData.num, method="pearson")
+high_corr <- subset(melt(M), value > .60 & value != 1)
+high_corr = high_corr[duplicated(high_corr$value),]
+high_corr %<>% arrange(desc(value))
+
+corrplot(M, method="circle")
+
+```
+
+## multi regression for price using MyDataSold
+
+```{r setup, include=FALSE}
+
+# 75% of the sample size 
+sample_size = floor(0.80*nrow(MyDataSold))
+
+# set the seed to make partition reproducible
+set.seed(123)
+training_indices = sample(seq_len(nrow(MyDataSold)), size = sample_size)
+
+## relevel certain factor variables 
+MyDataSold$city = relevel(MyDataSold$city, ref="Paris")
+MyDataSold$caliber = relevel(MyDataSold$caliber, ref="Small")
+MyDataSold$lot_position = relevel(MyDataSold$lot_position, ref="1")
+MyDataSold$decade_created = relevel(MyDataSold$decade_created, ref="50s")
+
+## mean center variables
+MyDataSold$avg_estimate_log_centered = log(MyDataSold$avg_estimate) - mean(log(MyDataSold$avg_estimate))
+MyDataSold$num_artists_log_centered = log(MyDataSold$num_artists) - mean(log(MyDataSold$num_artists))
+MyDataSold$auction_lot_centered = MyDataSold$auction_lot - mean(MyDataSold$auction_lot)
+MyDataSold$artist_avg_log_price_centered = MyDataSold$artist_avg_log_price - mean(MyDataSold$artist_avg_log_price)
+MyDataSold$total_publications_sqrt_centered = MyDataSold$total_publications - mean(MyDataSold$total_publications)
+MyDataSold$area_log_centered = log(MyDataSold$area) - mean(log(MyDataSold$area))
+
+training_data = MyDataSold[training_indices,]
+testing_data = MyDataSold[-training_indices,]
+
+## develop the model and use it for predictions on testing data (model building)
+model = lm(log_price ~ city + caliber  + avg_estimate_log_centered + num_artists_log_centered + 
+             auction_lot_centered + artist_avg_log_price_centered*decade_created +
+             total_publications_sqrt_centered + dummy_estimate_higher + dummy_peak_month +
+             area_log_centered + dummy_dead, data=training_data)
+summary(model)
+
+preds = predict(model, testing_data)
+
+## calculate correlation accuracy and error rates
+actuals_preds = data.frame(cbind(actuals=testing_data$log_price, predicteds=preds))
+
+correlation_accuracy = cor(actuals_preds)
+
+# min max accuracy
+min_max_accuracy <- mean(apply(actuals_preds, 1, min) / apply(actuals_preds, 1, max))  
+
+# mean absolute percentage error
+mape <- mean(abs((actuals_preds$predicteds - actuals_preds$actuals))/actuals_preds$actuals) 
+
+## k fold cross validation (model checking)
+
+data_ctrl <- trainControl(method = "cv", number = 5)
+
+formula = log_price ~ city + caliber  + avg_estimate_log_centered + num_artists_log_centered + 
+             auction_lot_centered + artist_avg_log_price_centered*decade_created +
+             total_publications_sqrt_centered + dummy_estimate_higher + dummy_peak_month +
+             area_log_centered + dummy_dead
+
+model_caret <- train(formula,  
+                     data = MyDataSold,                        
+                     trControl = data_ctrl,            
+                     method = "lm",                      
+                     na.action = na.pass)
+
+# model variable coefficients 
+model_caret$finalModel
+
+# model predictions for each fold 
+model_caret$resample
+
+# standard deviation around R squared 
+sd(model_caret$resample$Rsquared)
+
+
+
+```
+
+## residual analysis for regression on price
+## residuals show no problems
+
+```{r setup, include=FALSE}
+
+residuals = resid(model)
+
+# city 
+# residuals appear to be centered around 0
+plot(x=training_data$city, y=residuals)
+abline(0,0, col="red")
+
+# caliber 
+# residuals appear to be centered around 0
+plot(x=training_data$caliber, y=residuals)
+abline(0,0, col="red")
+
+# avg estimate
+# residuals appear to be random
+plot(x=log(training_data$avg_estimate), y=residuals)
+abline(0,0, col="red")
+
+# num artists
+# residuals appear to be random
+plot(x=log(training_data$num_artists), y=residuals)
+abline(0,0, col="red")
+
+# auction lot
+# residuals appear to be random
+plot(x=training_data$auction_lot, y=residuals)
+abline(0,0, col="red")
+
+## dummy estimate higher
+# residuals appear to be centered around 0
+plot(x=training_data$dummy_estimate_higher, y=residuals)
+abline(0,0, col="red")
+
+# total publications 
+# residuals appear to be random but for small total publications the residuals increase in absolute value terms
+plot(x=sqrt(training_data$total_publications), y=residuals)
+abline(0,0, col="red")
+
+# dummy peak month
+# residuals appear to be centered around 0
+plot(x=training_data$dummy_peak_month, y=residuals)
+abline(0,0, col="red")
+
+# dummy dead
+# residuals appear to be centered around 0
+plot(x=training_data$dummy_dead, y=residuals)
+abline(0,0, col="red")
+
+```
+
+## logistic regression for dummy sold using MyData
+
+```{r setup, include=FALSE}
+
+# 75% of the sample size 
+sample_size = floor(0.75*nrow(MyData))
+
+# set the seed to make partition reproducible
+set.seed(123)
+training_indices = sample(seq_len(nrow(MyData)), size = sample_size)
+
+MyData$city = relevel(MyData$city, ref="Paris")
+MyData$caliber = relevel(MyData$caliber, ref="Small")
+
+training_data = MyData[training_indices,]
+testing_data = MyData[-training_indices,]
+
+model = glm(dummy_sold~log(avg_estimate) + avg_log_price_sold_before + sale_rate_before + sqrt(volatility_returns_before) + sqrt(num_artworks_ratio) + city + caliber + artist_sale_rate + house_sale_rate + dummy_estimate_higher + sqrt(total_publications) + decade_created, family=binomial(link='logit'), data=training_data)
+
+summary(model)
+anova(model, test="Chisq")
+
+exp(cbind(OR = coef(model), confint(model)))
+with(model, null.deviance - deviance)
+with(model, df.null - df.residual)
+with(model, pchisq(null.deviance - deviance, df.null - df.residual, lower.tail = FALSE))
+
+## predictive accuracy of model 
+
+results = predict(model, testing_data, type="response")
+results = ifelse(results>0.5,1,0)
+error = mean(results != testing_data$dummy_sold)
+print(paste('Accuracy',1-error))
+
+pr = prediction(results, testing_data$dummy_sold)
+prf <- performance(pr, measure = "tpr", x.measure = "fpr")
+plot(prf)
+lines(x=c(0,1.0),y=c(0,1.0))
+
+confusion.matrix(results, testing_data$dummy_sold)
+
+false_positives = testing_data[which(results == 1 & testing_data$dummy_sold == 0),]
+```
+

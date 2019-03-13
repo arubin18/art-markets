@@ -1,0 +1,361 @@
+---
+title: "visualizations"
+output: html_document
+---
+
+## load libaries  
+
+```{r setup, include=FALSE}
+
+library(magrittr)
+library(dplyr)
+library(tidyr)
+library(feather)
+library(stringr)
+library(forcats)
+library(ROCR)
+library(ggplot2)
+library(stats)
+
+```
+
+## load data and data sold
+
+```{r setup, include=FALSE}
+
+path = "dataset.feather"
+MyData = read_feather(path)
+
+MyDataSold <- MyData %>%
+  filter(dummy_sold == 1) %>%
+  select(-dummy_sold)
+
+# remove observations with prices less than 1
+MyDataSold = MyDataSold[MyDataSold$price >= 1, ]
+
+## get log price
+MyDataSold %<>%
+  mutate(log_price = log(price))
+
+
+```
+
+## box plots of data and exploratory analysis for MyData (dummy sold)
+
+```{r setup, include=FALSE}
+
+# there is a lot of overlap between both levels
+# do not expect log area to be a good predictor for dummy sold
+boxplot(log(area)~dummy_sold, data=MyData)
+
+# there is some overlap but median is higher for sold artworks 
+boxplot(log(avg_estimate)~dummy_sold, data=MyData)
+
+# at 95% confidence level, there is a signifcant difference in means. We should reject the null hypothesis that the two means are equal because the p value is smaller than 0.05. 
+t.test(log(MyData$avg_estimate)~MyData$dummy_sold)
+
+# there is a lot of overlap between both levels
+# do not expect auction lot to be a good predictor for dummy sold
+boxplot(auction_lot~dummy_sold, data=MyData)
+
+# there is some overlap but median of average log price sold before is higher for not sold artworks and less variability for not sold artworks 
+boxplot(avg_log_price_sold_before~dummy_sold, data=MyData)
+
+# at 95% confidence level, there is a signifcant difference in means. We should reject the null hypothesis that the two means are equal because the p value is smaller than 0.05. 
+t.test(MyData$avg_log_price_sold_before~MyData$dummy_sold)
+
+# there is even less overlap between both levels
+# median of the log of median prices sold before is higher for sold artworks
+# we have to exclude observations with early auction lot 
+boxplot(log(median_price_sold_before)~dummy_sold, data=MyData[MyData$median_price_sold_before>=1,])
+
+# at 95% confidence level, there is a signifcant difference in means. We should reject the null hypothesis that the two means are equal because the p value is smaller than 0.05. 
+t.test(log(MyData$median_price_sold_before[MyData$median_price_sold_before>=1])~MyData$dummy_sold[MyData$median_price_sold_before>=1])
+
+# levels are nearly identical
+boxplot(num_artworks~dummy_sold, data=MyData)
+
+# levels are nearly identical
+boxplot(num_artists~dummy_sold, data=MyData)
+
+# observations that have sold have a higher median sale rate before but there are many outliers values below the first quartile 
+# increased the range of the whisker in order to account for outliers 
+# observations that have not sold still vary more in the sale rate before
+boxplot(sale_rate_before~dummy_sold, data=MyData, range=3)
+
+# at 95% confidence level, there is a signifcant difference in means. We should reject the null hypothesis that the two means are equal because the p value is smaller than 0.05. 
+t.test(MyData$sale_rate_before~MyData$dummy_sold)
+
+# seems to be a lot of overlap for both levels and very concentrated between second and third quartiles around both medians
+# indicates small changes might matter
+# performed a square root transformation in order to bring up outliers 
+boxplot(sqrt(volatility_returns_before)~dummy_sold, data=MyData, range=3)
+
+# at 95% confidence level, there is a signifcant difference in means. We should reject the null hypothesis that the two means are equal because the p value is smaller than 0.05.
+t.test(sqrt(MyData$volatility_returns_before)~MyData$dummy_sold)
+
+# a lot of overlap between both levels 
+# observations that have sold have more outliers from both outer quartiles
+# peformed absolute value transformation
+boxplot(abs(mean_returns_before)~dummy_sold, data=MyData)
+
+# at 95% confidence level, there is a signifcant difference in means. We should reject the null hypothesis that the two means are equal because the p value is smaller than 0.05.
+t.test(abs(MyData$mean_returns_before)~MyData$dummy_sold)
+
+# seems to be a lot of overlap for both levels and very concentrated between second and third quartiles around both medians
+# indicates small changes might matter
+# cannot perform square root or log transformation without excluding data points 
+boxplot(skew_prices_before~dummy_sold, data=MyData)
+
+# at 95% confidence level, there is a signifcant difference in means. We should reject the null hypothesis that the two means are equal because the p value is smaller than 0.05.
+t.test(MyData$skew_prices_before~MyData$dummy_sold)
+
+# a lot of overlap, especially when applying transformations
+# t test does not show that there is a significant difference in means
+boxplot(lots_per_artist~dummy_sold, data=MyData)
+
+# cannot observe differenes so applied sqrt transformation 
+# both levels are highly concentrated around the median
+# there seems to be some overlap but small changes might matter
+boxplot(sqrt(num_artworks_ratio)~dummy_sold, data=MyData)
+
+# at 95% confidence level, there is a signifcant difference in means. We should reject the null hypothesis that the two means are equal because the p value is smaller than 0.05.
+t.test(sqrt(MyData$num_artworks_ratio)~MyData$dummy_sold)
+
+# for observations that have sold, the third quartile seems to be much larger than the third quartile for observations that did not sell
+# observations that did not sell have small variance in total publications but many outliers 
+# increased the range of the outliers and applied sqrt transformation in order to bring down extreme values 
+boxplot(sqrt(total_publications)~dummy_sold, data=MyData, range=3)
+
+# at 95% confidence level, there is a signifcant difference in means. We should reject the null hypothesis that the two means are equal because the p value is smaller than 0.05.
+t.test(sqrt(MyData$total_publications)~MyData$dummy_sold)
+
+```
+
+## plots of data and exploratory analysis for MyDataSold (price)
+
+```{r setup, include=FALSE}
+
+## city
+boxplot(log_price~city, data=MyDataSold)
+# p value significant 
+bartlett.test(MyDataSold$log_price, MyDataSold$city)
+
+# excluding the outliers, the second lot position has the highest recorded log prices
+# the first lot positions vary a little more than the last two positions 
+# the second lot position has the highest median log price 
+p <- ggplot(MyDataSold, aes(x=lot_position, y=log_price, fill=lot_position)) + 
+  geom_boxplot(outlier.colour = "red", outlier.size=2) + theme_classic() +
+  labs(x="Lot Position", y="Log Price") + coord_flip() + ggtitle("Log Price for Lot Positions") +
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  scale_x_discrete(limits = rev(levels(MyData$lot_position)))
+p
+
+# bartlett test to see if the variances are homogeneous for all of the lot positions
+# since p value is less than 0.05, we can reject the null hypothesis 
+bartlett.test(MyDataSold$log_price, MyDataSold$lot_position)
+
+# individual t tests
+# compare second lot position with all other lot positions 
+
+# lot position 1 and 2
+# p value significant 
+t.test(MyDataSold$log_price[MyDataSold$lot_position == 1 | MyDataSold$lot_position == 2]~ MyDataSold$lot_position[MyDataSold$lot_position == 1 | MyDataSold$lot_position == 2])
+
+# lot position 2 and 3
+# p value significant 
+t.test(MyDataSold$log_price[MyDataSold$lot_position == 3 | MyDataSold$lot_position == 2]~ MyDataSold$lot_position[MyDataSold$lot_position == 3 | MyDataSold$lot_position == 2])
+
+# lot position 2 and 4
+# p value significant 
+t.test(MyDataSold$log_price[MyDataSold$lot_position == 4 | MyDataSold$lot_position == 2]~ MyDataSold$lot_position[MyDataSold$lot_position == 4 | MyDataSold$lot_position == 2])
+
+# avg estimate
+# apply log transformation on avg estimate
+# linear relationship
+plot(log(MyDataSold$avg_estimate), MyDataSold$log_price)
+abline(lm(MyDataSold$log_price~log(MyDataSold$avg_estimate)), col="red") # regression line
+lines(lowess(log(MyDataSold$avg_estimate),MyDataSold$log_price), col="blue") # lowess line
+
+## dummy signed 
+# noticeable difference in medians with similar variation 
+boxplot(log_price~dummy_signed, data=MyDataSold)
+# p value significant 
+# should look into artists more in depth
+t.test(MyDataSold$log_price~MyDataSold$dummy_signed)
+
+## area
+# applied log transformation in order to visualize the data
+# non linear relationship for small area due to outliers 
+plot(log(MyDataSold$area), MyDataSold$log_price)
+abline(lm(MyDataSold$log_price~log(MyDataSold$area)), col="red") # regression line
+lines(lowess(log(MyDataSold$area),MyDataSold$log_price), col="blue") # lowess line
+
+## auction lot
+# linear relationship with very small slope
+plot(MyDataSold$auction_lot, MyDataSold$log_price)
+abline(lm(MyDataSold$log_price~MyDataSold$auction_lot), col="red") # regression line
+lines(lowess(MyDataSold$auction_lot,MyDataSold$log_price), col="blue") # lowess line
+
+## average log price before
+# there are 63 observations with average less than 1 that might obscure linear relationship
+# these observations have on average 0.1693 auction lot number
+# graphically the curves seem to represent linear relationship
+plot(MyDataSold$avg_log_price_sold_before, MyDataSold$log_price)
+abline(lm(MyDataSold$log_price~MyDataSold$avg_log_price_sold_before), col="red") # regression line
+lines(lowess(MyDataSold$avg_log_price_sold_before,MyDataSold$log_price), col="blue") # lowess line
+
+## median price sold before
+# cannot apply transformation due to log(0) and sqrt leads to non linear relationship
+# again 63 observations that have value 0
+plot(sqrt(MyDataSold$median_price_sold_before), MyDataSold$log_price)
+abline(lm(MyDataSold$log_price~log(MyDataSold$median_price_sold_before)), col="red") # regression line
+lines(lowess(log(MyDataSold$median_price_sold_before),MyDataSold$log_price), col="blue") # lowess line
+
+## num artworks
+# log transformation results in most linear relationship
+# non linear relationship at small num artworks evident by lowess curve
+# assume overall linear relationship
+plot(log(MyDataSold$num_artworks), MyDataSold$log_price)
+abline(lm(MyDataSold$log_price~log(MyDataSold$num_artworks)), col="red") # regression line
+lines(lowess(log(MyDataSold$num_artworks),MyDataSold$log_price), col="blue") # lowess line
+# could split log(num artworks) at 2 but second level has declining trend line 
+
+## num artists
+# lowess curve has some bumps 
+# assume overall linear relationship
+plot(log(MyDataSold$num_artists), MyDataSold$log_price)
+abline(lm(MyDataSold$log_price~log(MyDataSold$num_artists)), col="red") # regression line
+lines(lowess(log(MyDataSold$num_artists),MyDataSold$log_price), col="blue") # lowess line
+
+## sale rate before
+# has a non linear relationship 
+plot(MyDataSold$sale_rate_before, MyDataSold$log_price)
+abline(lm(MyDataSold$log_price~MyDataSold$sale_rate_before), col="red") # regression line
+lines(lowess(MyDataSold$sale_rate_before,MyDataSold$log_price), col="blue") # lowess line
+
+## volatility returns before
+# has a non linear relationship
+x = MyDataSold$volatility_returns_before
+y = MyDataSold$log_price
+plot(x, MyDataSold$log_price)
+abline(lm(y~x), col="red") # regression line
+lines(lowess(x,y), col="blue") # lowess line
+
+## mean returns before
+# has a non linear relationship
+x = MyDataSold$mean_returns_before
+y = MyDataSold$log_price
+plot(x, MyDataSold$log_price)
+abline(lm(y~x), col="red") # regression line
+lines(lowess(x,y), col="blue") # lowess line
+
+## skew prices before
+# has a non linear relationship
+# cannot apply transformations due to points at 0
+x = MyDataSold$skew_prices_before
+y = MyDataSold$log_price
+plot(x, MyDataSold$log_price)
+abline(lm(y~x), col="red") # regression line
+lines(lowess(x,y), col="blue") # lowess line
+
+## lots per artist
+# has a non linear relationship
+x = MyDataSold$lots_per_artist
+y = MyDataSold$log_price
+plot(x, MyDataSold$log_price)
+abline(lm(y~x), col="red") # regression line
+lines(lowess(x,y), col="blue") # lowess line
+
+## num artworks ratio
+# has a non linear relationship
+x = sqrt(MyDataSold$num_artworks_ratio)
+y = MyDataSold$log_price
+plot(x, MyDataSold$log_price)
+abline(lm(y~x), col="red") # regression line
+lines(lowess(x,y), col="blue") # lowess line
+
+## artist average price
+# has a linear relationship with log transformation
+x = log(MyDataSold$artist_avg_price)
+y = MyDataSold$log_price
+plot(x, MyDataSold$log_price)
+abline(lm(y~x), col="red") # regression line
+lines(lowess(x,y), col="blue") # lowess line
+
+## auction average price
+# has a linear relationship with log transformation
+x = log(MyDataSold$auction_avg_price)
+y = MyDataSold$log_price
+plot(x, y)
+abline(lm(y~x), col="red") # regression line
+lines(lowess(x,y), col="blue") # lowess line
+
+## caliber 
+# noticeable difference in medians 
+boxplot(log_price~caliber, data=MyDataSold)
+# can reject null hypothesis due to significant p value 
+bartlett.test(MyDataSold$log_price, MyDataSold$caliber)
+
+## dummy estimate higher
+# noticeable difference in medians
+boxplot(log_price~dummy_estimate_higher, data=MyDataSold)
+# can reject null hypothesis due to significant p value 
+t.test(MyDataSold$log_price~MyDataSold$dummy_estimate_higher)
+
+## skew before type 
+boxplot(log_price~skew_before_type, data=MyDataSold)
+# can reject null hypothesis due to significant p value 
+bartlett.test(MyDataSold$log_price, MyDataSold$skew_before_type)
+
+## dummy dead
+# both levels seem nearly identical
+boxplot(log_price~dummy_dead, data=MyDataSold)
+# can reject null hypothesis due to significant p value 
+t.test(MyDataSold$log_price~MyDataSold$dummy_dead)
+
+## dummy peak month
+# peak month level has a higher median and higher variance 
+boxplot(log_price~dummy_peak_month, data=MyDataSold)
+# can reject null hypothesis due to significant p value 
+t.test(MyDataSold$log_price~MyDataSold$dummy_peak_month)
+
+## total publications
+# applied sqrt transformation
+# small total publications has a non linear relationship
+x = sqrt(MyDataSold$total_publications)
+y = MyDataSold$log_price
+plot(x, MyDataSold$log_price)
+abline(lm(y~x), col="red") # regression line
+lines(lowess(x,y), col="blue") # lowess line
+
+## dummy publications
+# observations that have publications have higher log price on average
+boxplot(log_price~dummy_publications, data=MyDataSold)
+# can reject null hypothesis due to significant p value 
+t.test(MyDataSold$log_price~MyDataSold$dummy_publications)
+
+## year created
+table(MyDataSold$year_created)
+averages = MyDataSold %>%
+  group_by(year_created) %>%
+  summarise(avg_price = mean(log_price))
+plot(averages)
+plot(table(MyDataSold$year_created))
+boxplot(log_price~year_created, data=MyDataSold)
+
+# look at price vs decade
+# MyDataSold$decade_created = cut(MyDataSold$year_created, 3, include.lowest=TRUE, labels=c("50s", "60s", "70s"))
+table(MyDataSold$decade_created) # art from the 60s has the biggest supply in auction houses today
+# the 60s has a higher median and third quartile
+boxplot(log_price~decade_created, data=MyDataSold)
+# can reject null hypothesis due to significant p value 
+bartlett.test(MyDataSold$log_price, MyDataSold$decade_created)
+
+# can reject null hypothesis due to significant p value 
+t.test(MyDataSold$log_price[MyDataSold$decade_created == "50s" | MyDataSold$decade_created == "60s"]~MyDataSold$decade_created[MyDataSold$decade_created == "50s" | MyDataSold$decade_created == "60s"])
+
+# can reject null hypothesis due to significant p value 
+t.test(MyDataSold$log_price[MyDataSold$decade_created == "70s" | MyDataSold$decade_created == "60s"]~MyDataSold$decade_created[MyDataSold$decade_created == "70s" | MyDataSold$decade_created == "60s"])`
+
+```

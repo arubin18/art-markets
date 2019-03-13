@@ -119,8 +119,8 @@ def clean_data(data, labels):
 		else:
 			avg_estimate = (float(low_estimate) + float(high_estimate)) / 2
 
-		# estimated to sell for free or for negative money
-		if avg_estimate <= 0.0:
+		# estimated to sell for free
+		if avg_estimate == 0.0:
 			continue
 
 		# clean area and volume 
@@ -217,13 +217,13 @@ def clean_data(data, labels):
 
 		# check if price is numerical
 		try: 
-			price = float(price)
+			price = int(price)
 
 		except:
 			continue
 
 		# sold for free 
-		if sold == 1 and price == 0.0:
+		if sold == 1 and price == 0:
 			continue
 
 		artwork_data = [idd, city, exhibition, artist, title, price, sold, avg_estimate, signed, area, \
@@ -261,7 +261,7 @@ def clean_data(data, labels):
 			log_returns.append(log_return)
 			
 			# descriptions of log returns 
-			vol_returns = np.std(log_return) # volatility = standard deviation of log returns
+			vol_returns = np.std(log_returns) # volatility = standard deviation of log returns
 			mean_returns = np.mean(log_returns)
 
 			# descriptions of prices and log prices 
@@ -282,15 +282,14 @@ def clean_data(data, labels):
 
 	for i in range(len(exhibition_data)):
 
-		exhibition_data[i][num_artists_index] = num_artists
-		exhibition_data[i][lots_per_artist_index] = float(artwork_count) / num_artists
-
 		lot_num = float(exhibition_data[i][lot_index])
 		exhibition_data[i][lot_index] = lot_num / largest_lot
 
 		artist = exhibition_data[i][artist_index]
 		exhibition_data[i][num_artworks_index] = artist_counter[artist]
 		exhibition_data[i][num_artworks_ratio_index] = float(artist_counter[artist]) / artwork_count
+		exhibition_data[i][num_artists_index] = num_artists
+		exhibition_data[i][lots_per_artist_index] = float(artwork_count) / num_artists
 
 	# skip line if missing values 
 	# exhibition_data = [line for line in exhibition_data if 'NA' not in line] # remove lines with NAs

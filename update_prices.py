@@ -6,9 +6,9 @@ def update_cpi(price_past, cpi_current, cpi_past, log_transform=False):
 
 	# price has a log transformation applied to it 
 	if log_transform:
-		return int(price_past + np.log(cpi_current) - np.log(cpi_past))
+		return float(price_past + np.log(cpi_current) - np.log(cpi_past))
 
-	return int(price_past * (cpi_current / cpi_past))
+	return float(price_past * (cpi_current / cpi_past))
 
 def update_prices(city):
 	""" update prices by cpi """
@@ -21,6 +21,7 @@ def update_prices(city):
 	labels = data[0]
 
 	price_index = labels.index("price")
+	title_index = labels.index("title")
 	avg_estimate_index = labels.index("avg_estimate")
 	avg_price_sold_before_index = labels.index("avg_log_price_sold_before")
 	median_price_sold_before_index = labels.index("median_price_sold_before")
@@ -36,15 +37,10 @@ def update_prices(city):
 
 	for i in range(1,length):
 
-		# get past prices
 		sale = data[i]
-		try:
-			price_past = float(sale[price_index])
-		except:
-			print (sale)
-			continue
 			
 		# past prices
+		price_past = float(sale[price_index])
 		avg_estimate_past = float(sale[avg_estimate_index])
 		avg_price_sold_before_past = float(sale[avg_price_sold_before_index]) # average of log prices
 		median_price_sold_before_past = float(sale[median_price_sold_before_index])
@@ -64,10 +60,10 @@ def update_prices(city):
 		median_price_sold_before_current = update_cpi(median_price_sold_before_past, cpi_current, cpi_past)
 
 		# update list with current prices
-		sale[price_index] = int(price_current)
-		sale[avg_estimate_index] = int(avg_estimate_current)
-		sale[avg_price_sold_before_index] = int(avg_price_sold_before_current)
-		sale[median_price_sold_before_index] = int(median_price_sold_before_current)
+		sale[price_index] = price_current
+		sale[avg_estimate_index] = avg_estimate_current
+		sale[avg_price_sold_before_index] = avg_price_sold_before_current
+		sale[median_price_sold_before_index] = median_price_sold_before_current
 
 		sale[-1] = sale[-1].strip("\n").strip("\r")
 		new_data.append(sale)
