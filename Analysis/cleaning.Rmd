@@ -200,9 +200,9 @@ types <- MyData %>%
 
 top_type = types[[1]]
 
-MyData %<>%
-  filter(medium_type == top_type) %>%
-  select(-medium_type)
+# MyData %<>%
+#   filter(medium_type == top_type) %>%
+#   select(-medium_type)
 
 ## create categorical variable representing lot position
 MyData %<>%
